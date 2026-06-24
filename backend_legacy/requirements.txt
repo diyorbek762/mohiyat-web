@@ -1,0 +1,26 @@
+# =============================================================================
+# Mohiyat AI — FastAPI Backend Dependencies
+# =============================================================================
+# FastAPI Core
+fastapi==0.115.12
+uvicorn[standard]==0.34.3
+python-multipart==0.0.20
+
+# LLM SDK (Google AI Studio — Gemini Flash & Pro)
+google-genai==1.18.0
+
+# Document Processing
+python-docx==1.1.2
+PyPDF2==3.0.1
+Pillow==11.2.1
+
+# OCR (Tesseract wrapper — binary installed in Docker)
+pytesseract==0.3.13
+
+# Supabase Client
+supabase==2.15.2
+
+# Security & Utils
+httpx==0.28.1
+pydantic==2.11.4
+pydantic-settings==2.9.1
