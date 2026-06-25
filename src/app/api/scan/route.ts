@@ -201,10 +201,10 @@ ${specificRules}`;
       }
 
       try {
-        // TIER 2: Gemini 2.0 Flash Lite (OpenRouter - Vision Capable)
-        finalModelUsed = "google/gemini-2.0-flash-lite-preview-02-05:free";
+        // TIER 2: Gemini 2.0 Pro Exp (OpenRouter - Vision Capable)
+        finalModelUsed = "google/gemini-2.0-pro-exp-02-05:free";
         const orResult = await openrouter.chat.completions.create({
-          model: "google/gemini-2.0-flash-lite-preview-02-05:free",
+          model: "google/gemini-2.0-pro-exp-02-05:free",
           messages: openRouterMessages,
           max_tokens: 4000
         });
@@ -217,9 +217,9 @@ ${specificRules}`;
         }
 
         // TIER 3: Llama 3.3 70B (Juda aqlli va aniq JSON beradi)
-        finalModelUsed = "meta-llama/llama-3.3-70b-instruct";
+        finalModelUsed = "meta-llama/llama-3.3-70b-instruct:free";
         const orResult2 = await openrouter.chat.completions.create({
-          model: "meta-llama/llama-3.3-70b-instruct",
+          model: "meta-llama/llama-3.3-70b-instruct:free",
           messages: openRouterMessages,
           max_tokens: 4000
         });
