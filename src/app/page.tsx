@@ -678,9 +678,29 @@ export default function App() {
             <Scale className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-black text-slate-900 text-center mb-2 tracking-tight">Mohiyat AI</h1>
-          <p className="text-slate-500 text-center mb-8 text-sm font-medium leading-relaxed">
+          <p className="text-slate-500 text-center mb-6 text-sm font-medium leading-relaxed">
             Shartnomalarni xavfsiz tahlil qilish uchun tizimga kiring
           </p>
+
+          <div className="mb-6 p-4 rounded-xl bg-blue-50 border border-blue-100 flex flex-col gap-2 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-2 opacity-10"><Scale className="w-16 h-16" /></div>
+            <h3 className="text-sm font-bold text-blue-800 flex items-center gap-2 relative z-10">
+              <Scale className="w-4 h-4" /> UZCombinator hakamlari uchun
+            </h3>
+            <p className="text-xs text-blue-700 leading-relaxed relative z-10">
+              Iltimos, loyiha imkoniyatlari va tahlillar tarixini baholash uchun quyidagi tayyor hisobdan foydalaning (API limitlari cheklanganligi sababli):
+            </p>
+            <div className="mt-1 bg-white/60 p-2.5 rounded-lg border border-blue-100 font-mono text-xs text-slate-700 relative z-10">
+              <div className="flex flex-col sm:flex-row sm:justify-between mb-2 sm:mb-1 gap-1">
+                <span className="font-bold text-slate-500 uppercase text-[10px] tracking-wider">Email</span> 
+                <span className="font-medium text-blue-900 select-all">dedamirzayevdiyorbek9@gmail.com</span>
+              </div>
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+                <span className="font-bold text-slate-500 uppercase text-[10px] tracking-wider">Parol</span> 
+                <span className="font-medium text-blue-900 select-all">Uzcombinator2026!</span>
+              </div>
+            </div>
+          </div>
 
           {errorMsg && (
             <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-100 flex items-start gap-3">
