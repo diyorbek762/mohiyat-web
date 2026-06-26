@@ -61,7 +61,7 @@ export function riskScoreColor(score: number): string {
  * Allowed file extensions for upload
  */
 export const ALLOWED_EXTENSIONS = [".pdf", ".png", ".jpg", ".jpeg", ".tiff", ".bmp"];
-export const MAX_FILE_SIZE_MB = 5;
+export const MAX_FILE_SIZE_MB = 4;
 export const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
 /**

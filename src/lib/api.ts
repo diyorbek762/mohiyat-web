@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import type { ScanResult } from "./supabase";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api";
+const API_BASE_URL = "/api";
 
 /**
  * Upload a document file to the FastAPI backend for freemium analysis.
