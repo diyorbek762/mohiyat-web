@@ -92,7 +92,7 @@ Xatni rasmiy o'zbek tilida, to'g'ridan-to'g'ri ikkinchi tarafga yuborishga tayyo
     let draftText = "";
     try {
       const response = await openrouter.chat.completions.create({
-        model: "google/gemini-2.0-pro-exp-02-05:free", // using pro exp free for best legal writing, fallback to llama
+        model: "openrouter/free", // auto-routes to fastest available model
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: "Iltimos, yuqoridagi shartlarga asosan xatni shakllantirib bering." }
@@ -103,7 +103,7 @@ Xatni rasmiy o'zbek tilida, to'g'ridan-to'g'ri ikkinchi tarafga yuborishga tayyo
       console.warn("OpenRouter API Failed, falling back to Llama", e);
       try {
         const fallbackResp = await openrouter.chat.completions.create({
-          model: "meta-llama/llama-3.3-70b-instruct:free",
+          model: "google/gemma-4-31b-it:free",
           messages: [
             { role: "system", content: systemPrompt },
             { role: "user", content: "Iltimos, yuqoridagi shartlarga asosan xatni shakllantirib bering." }
