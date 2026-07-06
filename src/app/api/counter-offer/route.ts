@@ -79,14 +79,26 @@ export async function POST(req: NextRequest) {
 
     const risksText = targetRisks.map((r: any) => `- **${r.title}**: ${r.recommendation}`).join("\n");
 
-    const systemPrompt = `Siz professional yuridik yordamchi agentisiz. Sizning vazifangiz shartnomaning ikkinchi tarafiga "Qarshi Taklif" (Counter-Offer) xatini yozib berishdir.
-Xat ohangi (Tone): ${tone === 'aggressive' ? "Qat'iy va himoyalangan" : tone === 'friendly' ? "Do'stona, kompromissga tayyor" : "Professional va qonuniy"}.
-Foydalanuvchi ism/kompaniyasi (agar bo'lsa): ${user_name || "Mijoz"}.
+    const systemPrompt = `Siz professional korporativ yurist sifatida foydalanuvchi nomidan ish ko'ryapsiz.
+SIZNING YAGONA VAZIFANGIZ — SHARTNOMANING IKKINCHI TARAFIGA TO'G'RIDAN-TO'G'RI YUBORILADIGAN "QARSHI TAKLIF" (COUNTER-OFFER) XATINI YOZISH.
+MAQOLA, QO'LLANMA YOKI TUSHUNTIRISH YOZMANG. FAQAT XATNING O'ZINI YOZING!
+XAT FAQAT VA FAQAT O'ZBEK TILIDA BO'LISHI SHART!
 
-Quyidagi xavflarni e'tiroz sifatida xatda yoritib, ularni o'zgartirishni so'rang:
+Xat ohangi (Tone): ${tone === 'aggressive' ? "Qat'iy va himoyalangan" : tone === 'friendly' ? "Do'stona, kompromissga tayyor" : "Professional va qonuniy"}.
+Foydalanuvchi (Xatni yuboruvchi): ${user_name || "Mijoz"}.
+
+Quyidagi xavflarni e'tiroz sifatida xatda yoritib, shartnomadagi shu bandlarni o'zgartirishni so'rang:
 ${risksText}
 
-Xatni rasmiy o'zbek tilida, to'g'ridan-to'g'ri ikkinchi tarafga yuborishga tayyor holatda yozing. Matn aniq va ravshan bo'lsin. Hech qanday markdown qavslari (masalan, [Kompaniya nomi] kabi) qoldirmang, imkon qadar tayyor matn qiling.`;
+XAT TUZILISHI:
+1. Ikkinchi tarafga rasmiy salomlashish (Hurmatli hamkor, va hokazo).
+2. Hamkorlikdan mamnunlik bildirish, lekin shartnomaning ba'zi bandlari qabul qilinmasligini aytish.
+3. Yuqoridagi xavflardan kelib chiqib, aniq qaysi bandlar qanday o'zgarishi kerakligini talab qilish.
+4. Rasmiy xayrlashuv.
+
+QAT'IY QOIDALAR:
+- INGLIZ YOKI RUS TILIDA YOZMANG, FAQAT O'ZBEK TILIDA YOZING.
+- [Kompaniya nomi] kabi qavslar qoldirmang, o'rniga "Sizning korxonangiz" yoki "Bizning tomon" kabi umumiy so'zlardan foydalaning.`;
 
     // Attempt AI Generation
     let draftText = "";
