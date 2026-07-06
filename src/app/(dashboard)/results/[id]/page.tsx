@@ -91,7 +91,14 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session?.access_token}` },
         body: JSON.stringify({ session_id: resolvedParams.id, selected_risks: coSelectedRisks, tone: coTone })
       });
-      const data = await res.json();
+      
+      let data;
+      try {
+        data = await res.json();
+      } catch (parseErr) {
+        throw new Error("Server javob bermadi (Timeout). Iltimos qayta urinib ko'ring.");
+      }
+      
       if (!res.ok) throw new Error(data.error || "Xatolik yuz berdi");
       
       setCoDraft(data.draft);
@@ -124,7 +131,14 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session?.access_token}` },
         body: JSON.stringify({ session_id: resolvedParams.id, message: userMsg.content })
       });
-      const data = await res.json();
+      
+      let data;
+      try {
+        data = await res.json();
+      } catch (parseErr) {
+        throw new Error("Server javob bermadi (Timeout).");
+      }
+      
       if (!res.ok) throw new Error(data.error);
 
       setChatMessages(prev => [...prev, { id: Date.now().toString(), role: 'assistant', content: data.response }]);
