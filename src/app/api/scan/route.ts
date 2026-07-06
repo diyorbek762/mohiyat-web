@@ -224,10 +224,6 @@ ${specificRules}`;
           "nvidia/nemotron-nano-12b-v2-vl:free",
           "openrouter/free"
         ] : [
-          "meta-llama/llama-3.3-70b-instruct:free",
-          "google/gemma-4-31b-it:free",
-          "nousresearch/hermes-3-llama-3.1-405b:free",
-          "qwen/qwen3-coder:free",
           "openrouter/free"
         ];
         
