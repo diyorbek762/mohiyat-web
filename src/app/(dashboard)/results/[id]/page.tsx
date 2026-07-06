@@ -36,6 +36,14 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
   // QR Certificate State
   const [qrModalOpen, setQrModalOpen] = useState(false);
 
+  // Toast State
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 3000);
+  };
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (!session) {
@@ -283,7 +291,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
               </div>
               <div className="mt-4 flex justify-end">
                 <button 
-                  onClick={() => navigator.clipboard.writeText(coDraft).then(() => alert("Nusxalandi!"))}
+                  onClick={() => navigator.clipboard.writeText(coDraft).then(() => showToast("Matn muvaffaqiyatli nusxalandi! 📋"))}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition-colors shadow-sm"
                 >
                   <FileText className="w-5 h-5" /> Nusxa olish
@@ -364,6 +372,16 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
         sessionId={resolvedParams.id}
         sessionData={sessionData}
       />
+
+      {/* Floating Toast Notification */}
+      {toastMsg && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-full font-bold shadow-2xl z-50 flex items-center gap-3 animate-in slide-in-from-bottom-5 fade-in duration-300">
+          <div className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center shrink-0">
+            <Check className="w-4 h-4 text-white" strokeWidth={3} />
+          </div>
+          <span className="text-sm">{toastMsg}</span>
+        </div>
+      )}
     </div>
   );
 }
