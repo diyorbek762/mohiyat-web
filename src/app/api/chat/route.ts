@@ -104,14 +104,14 @@ ${JSON.stringify(scanSession.full_report)}`
     let aiResponseText = "";
     try {
       const response = await openrouter.chat.completions.create({
-        model: "google/gemini-2.0-flash-exp:free", // fast chat model
+        model: "openrouter/free", // fast chat model
         messages: aiMessages,
       });
       aiResponseText = response.choices[0].message.content || "";
     } catch (e: any) {
       try {
         const fallbackResp = await openrouter.chat.completions.create({
-          model: "meta-llama/llama-3.3-70b-instruct:free",
+          model: "google/gemma-4-31b-it:free",
           messages: aiMessages,
         });
         aiResponseText = fallbackResp.choices[0].message.content || "";
