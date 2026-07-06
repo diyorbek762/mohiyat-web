@@ -49,23 +49,34 @@ export async function POST(req: NextRequest) {
 
     const authHeader = req.headers.get("Authorization");
     const token = authHeader?.replace("Bearer ", "");
+    const serverSecret = req.headers.get("X-Server-Secret");
     
-    if (!token || !userId) {
-      return NextResponse.json({ detail: "Avtorizatsiyadan o'tilmagan" }, { status: 401 });
-    }
+    let authSupabase;
+    
+    if (serverSecret === process.env.SUPABASE_SERVICE_ROLE_KEY) {
+       // Called internally by Telegram Webhook background worker
+       authSupabase = createClient(
+         process.env.NEXT_PUBLIC_SUPABASE_URL!,
+         process.env.SUPABASE_SERVICE_ROLE_KEY!
+       );
+    } else {
+       if (!token || !userId) {
+         return NextResponse.json({ detail: "Avtorizatsiyadan o'tilmagan" }, { status: 401 });
+       }
 
-    // Initialize authenticated Supabase client
-    const authSupabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        global: {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      }
-    );
+       // Initialize authenticated Supabase client
+       authSupabase = createClient(
+         process.env.NEXT_PUBLIC_SUPABASE_URL!,
+         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+         {
+           global: {
+             headers: {
+               Authorization: `Bearer ${token}`,
+             },
+           },
+         }
+       );
+    }
 
     // Check Coin Balance
     const { data: profile, error: profileError } = await authSupabase
@@ -283,11 +294,13 @@ ${specificRules}`;
       // Still return the analysis to the user, but warn about save failure
     }
 
-    // Decrement balance securely using atomic RPC
-    const { error: updateError } = await authSupabase.rpc('decrement_coins');
-      
-    if (updateError) {
-      console.error("Failed to deduct coin:", updateError);
+    if (!serverSecret) {
+      // Decrement balance securely using atomic RPC for web users
+      const { error: updateError } = await authSupabase.rpc('decrement_coins');
+        
+      if (updateError) {
+        console.error("Failed to deduct coin:", updateError);
+      }
     }
 
     // Return the response to the frontend

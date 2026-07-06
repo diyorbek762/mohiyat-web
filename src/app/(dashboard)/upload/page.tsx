@@ -159,7 +159,7 @@ export default function UploadPage() {
                 </div>
               </div>
               <a 
-                href="https://t.me/MohiyatAIBot" 
+                href="https://t.me/mohiyat_ai_bot" 
                 target="_blank" 
                 rel="noreferrer"
                 className="mt-2 w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors shadow-sm"
