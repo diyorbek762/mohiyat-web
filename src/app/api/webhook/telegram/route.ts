@@ -106,7 +106,8 @@ export async function POST(req: Request) {
       }
 
       // 2. Auth Check - Look up user by telegram_id
-      const { data: currentUser } = await supabaseAdmin.from('profiles').select('*').eq('telegram_id', chatId).single();
+      const { data: users } = await supabaseAdmin.from('profiles').select('*').eq('telegram_id', chatId).limit(1);
+      const currentUser = users && users.length > 0 ? users[0] : null;
 
       if (!currentUser) {
          // User not linked

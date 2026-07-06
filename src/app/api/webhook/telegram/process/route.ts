@@ -37,7 +37,12 @@ export async function POST(req: Request) {
     formData.append("user_id", userId);
 
     const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
-    const host = req.headers.get('host');
+    let host = req.headers.get('host');
+    
+    // Bypass Cloudflare tunnel in dev to avoid 100s timeout
+    if (process.env.NODE_ENV === 'development') {
+        host = '127.0.0.1:3000';
+    }
     
     const scanRes = await fetch(`${protocol}://${host}/api/scan`, {
       method: "POST",
@@ -47,10 +52,22 @@ export async function POST(req: Request) {
       body: formData
     });
 
-    const scanData = await scanRes.json();
+    let scanData;
+    try {
+        scanData = await scanRes.json();
+    } catch (e) {
+        scanData = { detail: "Serverda jiddiy xatolik (HTML format qaytdi)." };
+    }
 
     if (!scanRes.ok) {
-       await sendMessage(chatId, `❌ <b>Tahlilda xatolik yuz berdi:</b>\n${scanData.detail || "Noma'lum xato"}`);
+       // Refund the coin
+       const { supabaseAdmin } = await import('@/lib/supabase-admin');
+       const { data: profile } = await supabaseAdmin.from('profiles').select('balance').eq('id', userId).single();
+       if (profile) {
+          await supabaseAdmin.from('profiles').update({ balance: (profile.balance || 0) + 1 }).eq('id', userId);
+       }
+
+       await sendMessage(chatId, `❌ <b>Tahlilda xatolik yuz berdi:</b>\n${scanData.detail || "Server vaqtincha band."}\n\n💸 <i>Yechilgan 1 tanga (coin) hisobingizga qaytarildi. Iltimos, birozdan so'ng qayta urinib ko'ring.</i>`);
        return NextResponse.json({ error: scanData });
     }
 

@@ -14,6 +14,10 @@ export const maxDuration = 60;
 const openrouter = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey: process.env.OPENROUTER_API_KEY || "",
+  defaultHeaders: {
+    "HTTP-Referer": "https://mohiyat.vercel.app", // Optional, for including your app on openrouter.ai rankings.
+    "X-Title": "Mohiyat AI", // Optional. Shows in rankings on openrouter.ai.
+  }
 });
 
 // Upstash Rate Limiter (5 requests per minute per IP)
@@ -89,7 +93,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ detail: "Profil topilmadi" }, { status: 404 });
     }
 
-    if (profile.balance < 1) {
+    if (!serverSecret && profile.balance < 1) {
       return NextResponse.json({ detail: "Tanga yetarli emas. Hamyonni to'ldiring." }, { status: 402 });
     }
 
@@ -212,30 +216,51 @@ ${specificRules}`;
       }
 
       try {
-        // TIER 2: Gemini 2.0 Pro Exp (OpenRouter - Vision Capable)
-        finalModelUsed = "google/gemini-2.0-pro-exp-02-05:free";
-        const orResult = await openrouter.chat.completions.create({
-          model: "google/gemini-2.0-pro-exp-02-05:free",
-          messages: openRouterMessages,
-          max_tokens: 4000
-        });
-        responseText = orResult.choices[0].message.content || "";
-      } catch (tier2Error: any) {
-        console.warn("Tier 2 Failed. Falling back to Tier 3. Error:", tier2Error.message);
+        const isImage = file.type.startsWith("image/");
         
-        if (file.type.startsWith("image/")) {
-            throw new Error("Zaxira tizimi orqali rasmlarni tahlil qilish imkoniyati vaqtincha cheklangan. Iltimos PDF yuklang.");
-        }
+        // Vision models for images, or all models for text/PDF
+        const orModels = isImage ? [
+          "nvidia/nemotron-nano-12b-v2-vl:free",
+          "openrouter/free"
+        ] : [
+          "meta-llama/llama-3.3-70b-instruct:free",
+          "google/gemma-4-31b-it:free",
+          "nousresearch/hermes-3-llama-3.1-405b:free",
+          "qwen/qwen3-coder:free",
+          "openrouter/free"
+        ];
+        
+        let success = false;
+        let lastError = null;
 
-        // TIER 3: Llama 3.3 70B (Juda aqlli va aniq JSON beradi)
-        finalModelUsed = "meta-llama/llama-3.3-70b-instruct:free";
-        const orResult2 = await openrouter.chat.completions.create({
-          model: "meta-llama/llama-3.3-70b-instruct:free",
-          messages: openRouterMessages,
-          max_tokens: 4000
-        });
-        responseText = orResult2.choices[0].message.content || "";
-      }
+        for (const orModel of orModels) {
+           try {
+             finalModelUsed = orModel;
+             const orResult = await openrouter.chat.completions.create({
+               model: orModel,
+               messages: openRouterMessages,
+               max_tokens: 4000
+             });
+             responseText = orResult.choices[0].message.content || "";
+             success = true;
+             console.log(`[+] Muvaffaqiyatli zaxira model: ${orModel}`);
+             break; // Stop loop on success
+           } catch (e: any) {
+             console.warn(`[!] ${orModel} xato berdi:`, e.message);
+             lastError = e;
+           }
+        }
+        
+        if (!success) {
+           if (isImage) {
+               throw new Error("Zaxira tizimida rasmlarni o'qish vaqtincha cheklangan. Iltimos PDF yuklang.");
+           } else {
+               throw new Error(`429 Provider returned error: ${lastError?.message || "Barcha zaxira modellar band"}`);
+           }
+        }
+     } catch (fallbackError: any) {
+        throw fallbackError;
+     }
     }
 
     const processingMs = Date.now() - startTime;
