@@ -1,0 +1,208 @@
+=====================================================
+O'ZBEKISTON RESPUBLIKASI FUQAROLIK KODEKSI
+SHARTNOMALAR BO'YICHA ASOSIY MODDALAR
+=====================================================
+Manba: lex.uz | Oxirgi yangilanish: 2026-yil
+
+=====================================================
+I. SHARTNOMA TUSHUNCHASI VA TUZISH TARTIBI
+(28-bob, 353-385 moddalar)
+=====================================================
+
+353-modda. Shartnoma tushunchasi.
+Shartnoma — ikki yoki undan ortiq shaxsning fuqarolik huquq va burchlarini belgilash, o'zgartirish yoki bekor qilishga qaratilgan kelishuvidir. Majburiyatlar to'g'risidagi umumiy qoidalar shartnomaga ham qo'llaniladi.
+
+354-modda. Shartnoma erkinligi.
+Fuqarolar va yuridik shaxslar shartnoma tuzishda erkindir. Shartnoma tuzishga majburlashga yo'l qo'yilmaydi, qonun hujjatlarida nazarda tutilgan hollar bundan mustasno.
+
+355-modda. Haq evaziga va tekin shartnomalar.
+Agar bir tomon ikkinchi tomonga pul yoki boshqa narsani berishga majbur bo'lsa, bunday shartnoma haq evaziga shartnoma hisoblanadi.
+
+358-modda. Shartnoma sharoitlari.
+Shartnoma taraflarning kelishuviga asosan barcha zaruriy (muhim) shartlar bo'yicha kelishuv erishilganda tuzilgan hisoblanadi. Zaruriy shartlarga quyidagilar kiradi:
+  - Shartnoma PREDMETI (nima haqida — tovar, xizmat, ish)
+  - Qonunda shu turdagi shartnoma uchun MAJBURIY deb belgilangan shartlar
+  - Taraflardan birining talabiga ko'ra kelishilishi kerak bo'lgan shartlar
+
+361-modda. Oferta (taklif).
+Aniq bir yoki bir nechta shaxsga yuborilgan, shartnomaning barcha muhim shartlarini o'z ichiga olgan va shartnoma tuzish niyatini ifodalovchi taklif oferta hisoblanadi. Ofertani yuborgan shaxs (oferent) taklif qabul qilinsa, shartnoma tuzilgan hisoblanadi.
+
+366-modda. Aktsept (rozilik).
+Ofertaga javob sifatida olingan rozilik aktsept hisoblanadi. Aktsept to'liq va so'zsiz bo'lishi kerak. Agar ofertaga javobda boshqa shartlar taklif etilsa, bu yangi oferta (qarshi taklif) hisoblanadi.
+
+369-modda. Shartnomaning shakli.
+Shartnoma oferta va aktsept almashinuvi yo'li bilan yoki taraflarning bir hujjatni imzolashi yo'li bilan tuzilishi mumkin. Yozma shakl — ko'pgina shartnomalar uchun majburiy.
+
+=====================================================
+II. MAJBURIYATLARNI BAJARISH
+(21-bob, 291-309 moddalar)
+=====================================================
+
+291-modda. Majburiyatlarni tegishlicha bajarish.
+Majburiyatlar shartnoma shartlari, qonun hujjatlari talablari, ular bo'lmaganda esa ish muomalasi odatlari yoki odatda qo'yiladigan talablarga muvofiq bajarilishi shart.
+
+293-modda. Bir tomonlama rad etish taqiqlanishi.
+Majburiyatni bajarishdan bir tomonlama rad etishga va uning shartlarini bir tomonlama o'zgartirishga yo'l qo'yilmaydi, qonunchilik yoki shartnomada nazarda tutilgan hollar bundan mustasno.
+
+=====================================================
+III. MAJBURIYAT BAJARILISHINI TA'MINLASH USULLARI
+(23-bob, 256-290 moddalar)
+=====================================================
+
+256-modda. Ta'minlash usullari.
+Majburiyat bajarilishi quyidagilar bilan ta'minlanishi mumkin:
+  1. Neustoyka (jarima, penya)
+  2. Garov
+  3. Kafillik
+  4. Kafolat
+  5. Omonat
+  6. Qonun yoki shartnomada nazarda tutilgan boshqa usullar
+
+260-modda. Neustoyka tushunchasi.
+Neustoyka (jarima, penya) — qonun yoki shartnomada belgilangan pul summasi bo'lib, qarz oluvchi majburiyatni bajarmaganligi yoki tegishlicha bajarmaganligi uchun kreditorga to'lashi shart. Neustoyka undirilganda kreditor unga zarar etkazilganini isbotlab berishi shart emas.
+
+261-modda. Neustoyka shakllari.
+  - JARIMA (shtraf) — aniq belgilangan bir martalik to'lov
+  - PENYA — har bir kechiktirilgan kun uchun foiz hisobida undiriladi
+
+262-modda. Neustoyka kelishuvi shakli.
+Neustoyka to'g'risidagi kelishuv YOZMA SHAKLDA bo'lishi SHART. Yozma shaklga rioya qilmaslik — neustoyka kelishuvini haqiqiy emas deb topishga olib keladi.
+
+326-modda (263-modda). Neustoykani kamaytirish.
+⚠️ MUHIM: Agar to'lanishi lozim bo'lgan neustoyka majburiyatni buzish oqibatlariga NOMUTANOSIB bo'lsa, SUD uni kamaytirish huquqiga ega. Sud quyidagilarni hisobga oladi:
+  - Majburiyatning qancha bajarilganligi
+  - Taraflarning moliyaviy holati
+  - Kreditorning manfaatlari
+
+AMALIY MISOL: Kuniga 5% penya = yiliga 1825%. Bu nomutanosib katta. Sud buni kuniga 0.03-0.1% gacha kamaytirishi mumkin. Bozor standarti: 0.03-0.05% kuniga.
+
+=====================================================
+IV. MAJBURIYATNI BAJARMAGANLIK UCHUN JAVOBGARLIK
+(25-bob, 324-352 moddalar)
+=====================================================
+
+324-modda. Zararni qoplash majburiyati.
+Majburiyatni buzgan shaxs ikkinchi tarafga yetkazilgan zararlarni to'liq qoplashi shart. Zarar ikki turga bo'linadi:
+  - REAL ZARAR — darhol yetkazilgan moddiy zarar
+  - BOY BERILGAN FOYDA — buzilish bo'lmasa olinishi mumkin bo'lgan daromad
+
+333-modda. Javobgarlik asoslari.
+Qarz oluvchi majburiyatni bajarmaganlik yoki tegishlicha bajarmaganlik uchun AYBI bo'lsa javobgar hisoblanadi. Aybi yo'qligini ISBOTLASH vazifasi majburiyatni buzgan shaxsning zimmasiga yuklanadi.
+
+334-modda. Tadbirkorlik javobgarligi.
+⚠️ MUHIM: Tadbirkorlik faoliyati bilan shug'ullanuvchi shaxs majburiyatni bajaramaganlik uchun AYBI BO'LMASA HAM javobgar. Bundan faqat FORS-MAJOR holatlari mustasno (yengib bo'lmaydigan kuchlar).
+
+335-modda. Fors-major (yengib bo'lmaydigan kuchlar).
+Agar majburiyatni bajarib bo'lmaydigan holat yengib bo'lmaydigan kuch (tabiiy ofat, urush, pandemiya) oqibatida yuzaga kelsa, shaxs javobgarlikdan ozod qilinadi. DIQQAT: Bozordagi tovar yetishmasligi, kontragentlarning buzishi, pul yetishmasligi FORS-MAJOR EMAS.
+
+=====================================================
+V. SHARTNOMANI O'ZGARTIRISH VA BEKOR QILISH
+(29-bob, 382-385 moddalar)
+=====================================================
+
+382-modda. Shartnomani o'zgartirish va bekor qilish asoslari.
+Shartnoma quyidagi hollarda o'zgartirilishi yoki bekor qilinishi mumkin:
+  1. Taraflarning O'ZARO KELISHUVI bilan
+  2. SUD QARORIGA ASOSAN (bir tomonning talabiga ko'ra)
+  3. Bir tomonning RAD ETISHI bilan (faqat qonun yoki shartnomada nazarda tutilgan bo'lsa)
+
+383-modda. Shartnomani jiddiy buzish.
+Sud tartibida shartnomani bekor qilish uchun asoslardan biri — ikkinchi tarafning shartnomani JIDDIY BUZISHI. Jiddiy buzish deb — bir tarafning shartnomani buzishi natijasida ikkinchi taraf shartnoma tuzishda umid qilgan narsadan KATTA DARAJADA MAHRUM bo'lishi tushuniladi.
+
+384-modda. Vaziyatlarning jiddiy o'zgarishi.
+Agar shartnoma tuzilgandan keyin vaziyatlar shu qadar jiddiy o'zgarsa (masalan, bozor inqirozi), taraflar shartnomani sud orqali o'zgartirishni yoki bekor qilishni talab qilishlari mumkin.
+
+385-modda. Pretenziya (sudgacha) tartib.
+⚠️ JUDA MUHIM: Shartnomani bekor qilish to'g'risida sudga murojaat qilishdan OLDIN, majburiy ravishda ikkinchi tarafga YOZMA TAKLIF (pretenziya) yuborilishi shart.
+  - Ikkinchi tarafdan RAD JAVOBI olinganidan keyin sudga murojaat qilish mumkin
+  - Agar 30 KUN ICHIDA javob kelmasa — sudga murojaat qilish huquqi paydo bo'ladi
+
+=====================================================
+VI. OLDI-SOTDI SHARTNOMASI
+(29-bob, 386-496 moddalar)
+=====================================================
+
+386-modda. Oldi-sotdi shartnomasi.
+Oldi-sotdi shartnomasiga ko'ra:
+  - SOTUVCHI tovarni xaridorga mulk qilib topshiradi
+  - XARIDOR tovarni qabul qilib, haqini to'laydi
+
+388-modda. Tovar haqidagi shart.
+Shartnomada tovarning NOMI va MIQDORI ko'rsatilishi SHART. Aks holda shartnoma tuzilmagan hisoblanadi.
+
+393-modda. Tovar sifati.
+Sotuvchi xaridor huquqlaridan xoli tovar berishi shart. Agar tovar sifatsiz bo'lsa, xaridor:
+  - narxni kamaytirishni
+  - bepul tuzatishni
+  - tovarni almashtirishni
+  - shartnomani bekor qilishni talab qilishi mumkin
+
+=====================================================
+VII. IJARA SHARTNOMASI
+(34-35 boblar, 535-630 moddalar)
+=====================================================
+
+535-modda. Ijara shartnomasi.
+Ijara shartnomasiga ko'ra ijaraga beruvchi mol-mulkni ijaraga oluvchiga MUDDATLI FOYDALANISHGA beradi. Ijaraga oluvchi ijara haqini to'laydi.
+
+537-modda. Ijara muddati.
+  - Shartnomada muddat ko'rsatilmasa — MUDDATSIZ tuzilgan hisoblanadi
+  - Ijara muddati 1 yildan oshsa — YOZMA SHAKL SHART
+  - Ko'chmas mulk ijarasi — DAVLAT RO'YXATIDAN o'tishi shart (1 yildan ortiq)
+
+544-modda. Ijara haqi.
+Ijara haqining miqdori, to'lov muddati va tartibi shartnomada belgilanadi. Bir tomonlama o'zgartirishga YO'L QO'YILMAYDI.
+
+555-modda. Ijaraga oluvchining mulkni qaytarish majburiyati.
+Ijara muddati tugaganda ijaraga oluvchi mol-mulkni ijaraga beruvchiga shu holatda qaytarishi shart.
+
+606-modda. Uy-joy ijara shartnomasi.
+Uy-joy ijarasida quyidagilar ko'rsatilishi SHART:
+  - Uy-joyning aniq manzili va maydoni
+  - Ijara muddati
+  - Ijara haqi miqdori
+
+611-modda. Ijara haqini belgilash.
+Ijaraga oluvchi va ijaraga beruvchi ijara haqini o'zaro kelishib belgilaydi. Bir tomonlama oshirishga yo'l qo'yilmaydi.
+
+615-modda. Uy-joy ijara shartnomasini bekor qilish.
+Ijaraga beruvchi shartnomani faqat quyidagi hollarda bekor qilishi mumkin:
+  - Ijaraga oluvchi 6 oy davomida to'lovni amalga oshirmasa
+  - Ijaraga oluvchi uy-joyni buzsa yoki maqsadga muvofiq foydalanmasa
+
+=====================================================
+VIII. PUDRAT SHARTNOMASI
+(37-bob, 631-702 moddalar)
+=====================================================
+
+631-modda. Pudrat shartnomasi.
+Pudrat shartnomasiga ko'ra:
+  - PUDRATCHI buyurtmachining topshirig'iga ko'ra ish bajaradi va NATIJASINI topshiradi
+  - BUYURTMACHI ish natijasini qabul qilib, haq to'laydi
+
+637-modda. Ishning muddati.
+Shartnomada ish boshlanish va tugash MUDDATLARI ko'rsatilishi shart.
+
+641-modda. Ish narxi.
+Ish narxi shartnomada belgilanadi. Agar SMETA tuzilsa, narx smetaga asosan belgilanadi. Narxni bir tomonlama oshirishga yo'l qo'yilmaydi.
+
+649-modda. Ish sifati.
+Pudratchi ishni shartnoma shartlari va texnik me'yorlarga muvofiq bajarishi shart. Sifatsiz ish topilsa, buyurtmachi:
+  - bepul qayta ishlashni
+  - narxni kamaytirishni
+  - zararni qoplashni talab qilishi mumkin
+
+=====================================================
+IX. HAQ EVAZIGA XIZMAT KO'RSATISH SHARTNOMASI
+(39-bob, 703-710 moddalar)
+=====================================================
+
+703-modda. Xizmat ko'rsatish shartnomasi.
+Xizmat ko'rsatish shartnomasiga ko'ra:
+  - IJROCHI buyurtmachining topshirig'i bilan xizmat ko'rsatadi
+  - BUYURTMACHI xizmat uchun haq to'laydi
+Pudratdan FARQI: Xizmatda MODDIY NATIJA bo'lmaydi (konsalting, ta'lim, audit)
+
+710-modda. Shartnomani bekor qilish.
+  - BUYURTMACHI xizmat ko'rsatish shartnomasini istalgan paytda bekor qilishi mumkin, ammo ijrochiga haqiqatda ko'rsatilgan xizmatlar uchun haq to'lashi shart
+  - IJROCHI shartnomani faqat buyurtmachi majburiyatlarini buzgan taqdirda bekor qilishi mumkin

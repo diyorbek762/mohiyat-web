@@ -60,7 +60,7 @@ export function riskScoreColor(score: number): string {
 /**
  * Allowed file extensions for upload
  */
-export const ALLOWED_EXTENSIONS = [".pdf", ".png", ".jpg", ".jpeg", ".tiff", ".bmp"];
+export const ALLOWED_EXTENSIONS = [".pdf"];
 export const MAX_FILE_SIZE_MB = 4;
 export const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
@@ -69,9 +69,15 @@ export const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
  */
 export function validateFile(file: File): string | null {
   const ext = "." + file.name.split(".").pop()?.toLowerCase();
+  
   if (!ALLOWED_EXTENSIONS.includes(ext)) {
-    return `Fayl turi qo'llab-quvvatlanmaydi: ${ext}. Qo'llab-quvvatlanadigan formatlar: PDF va Rasm (PNG, JPG)`;
+    const tgExtensions = [".png", ".jpg", ".jpeg", ".docx", ".doc", ".xlsx", ".txt"];
+    if (tgExtensions.includes(ext)) {
+      return "TG_BOT_REDIRECT";
+    }
+    return `Fayl turi qo'llab-quvvatlanmaydi: ${ext}. Faqat PDF formatida yuklang.`;
   }
+  
   if (file.size > MAX_FILE_SIZE_BYTES) {
     return `Fayl hajmi ${MAX_FILE_SIZE_MB}MB dan oshmasligi kerak. Hozirgi: ${formatFileSize(file.size)}`;
   }

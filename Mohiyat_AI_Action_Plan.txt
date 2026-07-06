@@ -1,0 +1,162 @@
+# 🚀 Mohiyat AI — Keyingi Qadamlar (July 5, 2026)
+
+> Kontekst: Kechagidan davom — 3 ta artifact (ideation roadmap, strategy log, project review) asosida prioritetlangan action plan.
+
+---
+
+## 📍 Hozirgi Holat (Where We Are)
+
+| ✅ Tayyor | ⚠️ Yaxshilash kerak |
+|-----------|---------------------|
+| AI tahlil pipeline (3-tier fallback) | page.tsx monoliti (1050+ qator) |
+| Vector RAG (pgvector + Gemini Embedding) | Service Worker — faqat pass-through |
+| Coin tizimi + Promokodlar | To'lov integratsiyasi faol emas |
+| Admin panel (5 bo'lim) | OCR faqat Gemini Vision (xira rasmlar muammo) |
+| PWA installable | Telegram bot integratsiyasi yo'q |
+| Rate Limiting (Upstash Redis) | B2B dashboard yo'q |
+| PostHog Analytics | Side-by-side PDF viewer yo'q |
+| Shared Report Link | Auto-Fix (rewrite) yo'q |
+
+---
+
+## 🏆 SPRINT 1: Demo-Ready (President Tech Award Tayyorgarlik)
+> Muddat: 1-2 hafta | Maqsad: Hakamlarga WOW effekt
+
+### 1.1 🎨 Frontend Refactor (Eng birinchi!)
+Hozirgi page.tsx 1050+ qator monolit — demo paytida navigatsiya va scale qilish qiyin.
+
+Taklif:
+src/app/
+├── (auth)/
+│   └── login/page.tsx          # Auth screen
+├── (dashboard)/
+│   ├── layout.tsx              # Sidebar/Navigation
+│   ├── upload/page.tsx         # Upload screen
+│   ├── results/[id]/page.tsx   # Results screen
+│   ├── history/page.tsx        # History screen
+│   └── profile/page.tsx        # Profile screen
+├── (admin)/
+│   └── admin/page.tsx          # Admin panel
+└── (landing)/
+    └── page.tsx                # Landing page (Hero + Sections)
+
+Foyda:
+- Har bir sahifa mustaqil yuklanadi (performance ⬆️)
+- URL-based navigation (hakamlarga ko'rsatish oson)
+- Code splitting avtomatik
+
+### 1.2 🖥️ Side-by-Side Viewer (Killer Feature for Demo)
+Hujjatning PDF ko'rinishi chap tomonda, AI tahlili o'ng tomonda. Xavfga bosilganda PDF'dagi aynan o'sha joy highlight bo'ladi.
+
+Texnik yondashuv:
+- react-pdf yoki pdf.js kutubxonasidan foydalanish
+- Tahlildagi har bir band uchun page_number va text_snippet qaytarish (system prompt o'zgartirish)
+- Highlight qilish uchun PDF.js annotation layer
+
+Nima uchun muhim: Bu hakamlarga "oddiy AI wrapper" emas, balki to'laqonli professional tool ekanligini ko'rsatadi.
+
+### 1.3 📊 Mohiyat Score (A+B Baholash Tizimi) & Trust Badge
+Hozirgi oddiy risk_score o'rniga 5 ta kategoriya bo'yicha (A+B aralash yondashuvi: AI tahlil + Aniq qoidalar) 100 ballik baholash tizimini joriy etish:
+
+5 ta Kategoriya (Rubrika):
+1. 📋 To'liqlik (Completeness) — Barcha majburiy bandlar bormi? (0-20 ball)
+2. ⚖️ Qonunga muvofiqlik (Legality) — Qonunga zid shartlar yo'qmi? (0-20 ball)
+3. ⚔️ Muvozanat (Balance) — Ikkala tomon huquqlari adolatlimi? (0-20 ball)
+4. 🔍 Aniqlik (Clarity) — Narx, muddat kabi shartlar aniqmi? (0-20 ball)
+5. 🛡️ Himoyalanganlik (Protection) — Fors-major, kafolat bormi? (0-20 ball)
+
+Eslatma: Har bir shartnoma turi uchun kategoriyalar og'irligi har xil bo'ladi (Masalan: Mehnat shartnomasida qonunga muvofiqlik 30%).
+
+Baholash darajalari:
+- A+ (90-100) — 🟢 Mukammal, xavfsiz
+- B (75-89) — 🟡 Yaxshi, kichik tuzatishlar kerak
+- C (50-74) — 🟠 O'rtacha, muhim bandlar yetishmaydi
+- D (25-49) — 🔴 Xavfli, jiddiy muammolar
+- F (0-24) — ⛔ Juda xavfli
+
++ QR kodli sertifikat — "Mohiyat AI tomonidan tekshirilgan" (sharable link bilan)
+
+### 1.4 🎬 Pitch Deck Yangilash
+Kechagi qarorlar asosida:
+- Jamoa: 3 kishi (Founder + AI Dev + Marketer)
+- Vizyon: "Kichik bizneslar uchun E-IMZO integratsiyasiga ega raqamli yurist va B2B xab"
+- Niche: Qurilish → Ko'chmas mulk → IT Frilanserlar (Domino effekti)
+
+---
+
+## 🏗️ SPRINT 2: Product-Market Fit (Award keyin, 2-4 hafta)
+> Maqsad: Real foydalanuvchilardan validated feedback
+
+### 2.1 📱 Telegram Bot (MVP)
+O'zbekistonda eng kuchli kanal.
+- Shartnomani botga forward → bot xavflarni qisqacha aytadi
+- "To'liq hisobot uchun saytga kiring" CTA
+- Monetizatsiya: Bot orqali coin sotish
+
+Texnik: grammy yoki telegraf framework, Vercel Edge Function
+
+### 2.2 ✍️ Draft Mode (Shartnoma Yaratuvchi)
+Foydalanuvchi: "Menga frilans shartnoma kerak, oylik $1000, 1 yilga"
+AI: To'liq yuridik shartnoma generatsiya qiladi.
+
+Texnik: Yangi API route /api/draft, alohida system prompt, PDF generatsiya (@react-pdf/renderer)
+
+### 2.3 🔧 Auto-Fix (Rewrite)
+AI nafaqat xato ko'rsatadi, balki "Xavfsiz variant" taklif qiladi.
+- Har bir blind_spot uchun suggested_fix maydoni
+- "Tuzatilgan versiyani yuklab olish" tugmasi (PDF/DOCX export)
+
+### 2.4 📞 Customer Discovery (Bekzod vazifasi)
+10-15 ta tadbirkor/buxgalter bilan intervyu:
+- Pain Intensity — Muammo qanchalik og'riqli?
+- Time to Value — 30 soniyada tekshirish qanchaga arziydi?
+- Willingness to Pay — Qaysi model: pay-per-use / obuna / API?
+
+---
+
+## 🔮 SPRINT 3: Scale & Monetize (1-3 oy)
+> Maqsad: Revenue va B2B
+
+### 3.1 💰 To'lov Integratsiyasi
+- Payme / Click SDK integratsiyasi
+- transactions jadval allaqachon tayyor
+- Pricing: 1 coin = 3,000-5,000 so'm, paketlar (10/50/100 coin)
+
+### 3.2 🏢 B2B Dashboard
+- Jamoa rollari: Direktor, Yurist, Menejer
+- "Custom Rules" — kompaniya o'z qoidalarini kiritadi
+- API access — ERP integratsiya (1C, Bitrix24)
+
+### 3.3 🤖 Advanced AI
+- Diff Tool — Ikki versiyani solishtirish
+- Multi-Agent Negotiation — AI to AI savdolashuv
+- Predictive Analytics — Sud statistikasi asosida bashorat
+- E-IMZO integratsiyasi — davlat tizimi bilan ulash
+
+---
+
+## 🔧 Texnik Qarz (Har doim parallel bajarish)
+
+| Prioritet | Vazifa | Sabab |
+|-----------|--------|-------|
+| Yuqori | page.tsx refactor | Scale va demo uchun shart |
+| Yuqori | Tesseract.js OCR qo'shish | Xira rasmlar uchun RAG ishlamaydi |
+| O'rta | Service Worker caching | Oflayn tarix ko'rish |
+| O'rta | Error boundary qo'shish | Foydalanuvchi UX |
+| Past | Unit testlar | Kelajak uchun code quality |
+| Past | i18n (ko'p tillilik) | O'zbek / Rus / English |
+
+---
+
+## ❓ Muhokama uchun savollar
+
+1. Sprint 1 da qaysi feature birinchi? Side-by-side viewer yoki frontend refactor?
+2. Telegram bot — full feature yoki faqat "teaser" (1 bepul scan, keyin saytga yo'naltirish)?
+3. Draft Mode — bu alohida mahsulot bo'ladimi yoki hozirgi platformaga integratsiya?
+4. To'lov — Payme yoki Click yoki ikkisi ham?
+5. Jamoa a'zolari — AI Dev kim bo'ladi? Hozirgi jamoada backend yoza oladigan odam bormi?
+6. Customer Discovery — Bekzod bilan rejani muhokama qildingizmi?
+
+---
+
+Tavsiyam: Sprint 1 da eng birinchi Frontend Refactor qilish kerak, chunki boshqa barcha feature'lar (side-by-side viewer, draft mode, B2B) shu arxitektura ustiga quriladi. Monolit page.tsx da yangi feature qo'shish bor narsa buzilishiga olib keladi.

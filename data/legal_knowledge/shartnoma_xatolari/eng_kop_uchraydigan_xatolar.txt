@@ -1,0 +1,213 @@
+=====================================================
+SHARTNOMA TUZISHDA ENG KO'P UCHRAYDIGAN XATOLAR
+VA ULARNING OQIBATLARI
+=====================================================
+Manba: norma.uz, lex.uz, sud amaliyoti
+
+=====================================================
+I. ENG XAVFLI 10 TA XATO
+=====================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XATO #1: TAYYOR SHABLONDAN KO'R-KO'RONA FOYDALANISH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nima: Internetdan yoki boshqa kompaniyadan olingan namunaviy
+shartnomani o'zgartirmay, o'z biznesiga moslashtimasdan ishlatish.
+
+Xavf: Shablonda sizning biznesingizga mos kelmaydigan bandlar
+bo'lishi mumkin. Masalan: qurilish pudrati shablonida "material
+pudratchi tomonidan ta'minlanadi" deb yozilgan, lekin aslida
+siz material berasiz.
+
+Oqibat: Nizo chiqsa — shartnomada yozilgani ishlaydi, siz
+nimani mo'ljallaganingiz emas.
+
+Maslahat: Har bir shartnomani o'z BIZNESINGIZGA moslang.
+Kamida 3 ta narsani ALBATTA tekshiring: predmet, narx, muddat.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XATO #2: MUHIM SHARTLARNI NOANIQ YOZISH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nima: "Kelishuvga ko'ra", "keyinroq aniqlashtirish", 
+"o'zaro kelishilgan narxda" kabi noaniq iboralar ishlatish.
+
+YOMON:  "To'lov kelishuvga ko'ra amalga oshiriladi"
+YAXSHI: "To'lov har oyning 5-sanasiga MChJ 'XXX' ning 
+        20208000XXXXX bank hisobiga o'tkaziladi"
+
+YOMON:  "Ish muddati — tezroq"
+YAXSHI: "Ish 2026-yil 1-avgustda boshlanadi va 2026-yil 
+        1-noyabrda yakunlanadi"
+
+Xavf: Sud noaniq shartni SIZNING FOYOANGIZGA emas, 
+qonun bo'yicha talqin qiladi.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XATO #3: KONTRAGENTNI TEKSHIRMASLIK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nima: Shartnoma imzolashdan oldin qarshi tomonni tekshirmaslik:
+  - Kompaniya haqiqatan mavjudmi?
+  - Imzo chekayotgan shaxs vakolatli mi?
+  - Kompaniyaning moliyaviy holati qanday?
+  - Oldingi nizolari bormi?
+
+Tekshirish usullari:
+  ✅ my.gov.uz — yuridik shaxslar ma'lumotlari
+  ✅ stat.uz — statistik ma'lumotlar
+  ✅ sud.uz — sud ishlarini tekshirish
+  ✅ soliq.uz — soliq qarzdorligi
+
+Xavf: Yo'q kompaniya bilan shartnoma tuzsangiz — pulingizni
+qaytarib ola olmaysiz.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XATO #4: JAVOBGARLIK BANDINI E'TIBORSIZ QOLDIRISH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nima: Shartnomada "javobgarlik" bo'limi bo'lmasa yoki
+juda umumiy yozilsa.
+
+YOMON:  "Taraflar qonun bo'yicha javobgar"
+YAXSHI: "Ijaraga oluvchi to'lovni kechiktirsa, har 
+        kechiktirilgan kun uchun to'lov summasining 
+        0.05% miqdorida penya to'laydi"
+
+Xavf: Javobgarlik bandi bo'lmasa — siz faqat REAL ZARARNI 
+isbotlab undirishingiz mumkin (bu juda qiyin). Penya/jarima 
+bo'lsa — zarar isbotlamasdan ham undira olasiz.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XATO #5: PENYA MIQDORINI TEKSHIRMASLIK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nima: Shartnomada penya yozilgan, lekin uni HISOBLAB ko'rmaslik.
+
+MISOL:
+  "Kechiktirilgan har kun uchun 3% penya"
+  = Yiliga 1095%
+  = 1 oy kechiktirsa → qarzning 90% ini penya sifatida to'laydi
+
+BOZOR STANDARTI:
+  Normal:  kuniga 0.03% - 0.1% (yiliga 10-36%)
+  Xavfli:  kuniga 0.5% - 1% (yiliga 180-365%)
+  NOQONUNIY: kuniga 3-5% (sud kamaytiradi, FK 326-modda)
+
+Maslahat: Penyani yillik foizga aylantiring. 
+Agar 100% dan oshsa — savdolashing!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XATO #6: BIR TOMONLAMA BEKOR QILISH BANDINI QABUL QILISH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nima: "Ijaraga beruvchi istalgan vaqt ogohlantirishsiz 
+shartnomani bekor qilishi mumkin" kabi band.
+
+Xavf: Siz do'kon ochib, ta'mir qilib, reklama berib, 
+mijozlar yig'dingiz. Bir kuni yer egasi "chiqib keting" 
+deydi — siz hammasini yo'qotasiz.
+
+To'g'ri variant: "Shartnomani bekor qilish uchun kamida 
+30 (60/90) kun oldindan yozma xabar berish shart"
+
+FK 615-modda: Uy-joy ijarasida ijaraga beruvchi faqat
+QONUNDA belgilangan hollarda bekor qila oladi:
+  - 6 oy to'lov qilinmasa
+  - Mulk buzilsa
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XATO #7: FORS-MAJOR BANDINI QO'YMASLIK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nima: Shartnomada fors-major (yengib bo'lmaydigan kuchlar)
+bandi umuman yo'q.
+
+Xavf: COVID-19 kabi pandemiya bo'lsa, siz majburiyatni
+bajara olmasangiz ham — penya va jarima to'laysiz.
+
+To'g'ri variant: Shartnomaga quyidagi bandni qo'shing:
+"Tabiiy ofat, urush, pandemiya, hukumat qarorlari kabi
+yengib bo'lmaydigan kuchlar oqibatida majburiyatlar
+bajarilmasa, taraflar javobgarlikdan ozod qilinadi.
+Bunda ta'sirlangan tomon ikkinchi tomonga 5 ish kuni
+ichida yozma xabar berishi shart."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XATO #8: 100% OLDINDAN TO'LOV QILISH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nima: Pudrat yoki xizmat shartnomasi bo'yicha ishni
+boshlamasdan oldin 100% to'lovni amalga oshirish.
+
+Xavf: Pudratchi pulni olib, ishni bajarmay ketishi mumkin.
+Pulni qaytarib olish — sud orqali 6-12 oy vaqt oladi.
+
+To'g'ri variant: Bosqichli to'lov:
+  - 20-30% oldindan (boshlash uchun)
+  - 40-50% ish davomida (oraliq)
+  - 20-30% ish topshirilgandan keyin (yakuniy)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XATO #9: NIZOLARNI HAL QILISH TARTIBINI YOZMASLIK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nima: Shartnomada "nizo chiqsa nima qilamiz" deb yozilmagan.
+
+Xavf: Nizo chiqganda — qaysi sudga borish kerak?
+Sizning shahardagimi yoki kontragentniki shahardagimi?
+Agar yozilmasa — kontragent o'z shahridagi sudga 
+da'vo qilishi mumkin (sizga noqulay).
+
+To'g'ri variant: 
+"Nizolar avval PRETENZIYA tartibi da hal qilinadi 
+(30 kun muhlat). Kelishuv bo'lmasa — Toshkent shahar 
+Iqtisodiy sudi tomonidan ko'rib chiqiladi."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XATO #10: IMZOLASH VA MUHR MASALASIGA E'TIBORSIZLIK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nima: Shartnomani kim imzolayotganini tekshirmaslik.
+
+Xavf:
+  - Direktor o'rniga oddiy xodim imzolagan — shartnoma
+    HAQIQIY EMAS bo'lishi mumkin
+  - Ishonchnomasi yo'q shaxs imzolagan — shartnoma haqiqiy emas
+  - Muhr qo'yilmagan (agar kompaniyada muhr bo'lsa) — 
+    shartnoma kuchi savol ostida
+
+Maslahat:
+  ✅ Imzolash oldidan so'rang: "Sizning vakolatingiz?"
+  ✅ Ustav yoki ishonchnomani ko'ring
+  ✅ Muhr bosilganligini tekshiring
+
+=====================================================
+II. DAVLAT ORGANLARI VA SOLIQ XATOLARI
+=====================================================
+
+IJARA SHARTNOMASI:
+  ⚠️ ijara.soliq.uz da 10 kun ichida ro'yxat — MAJBURIY
+  ⚠️ Ro'yxat qilmaslik jarima: BHM × 5 dan 10 gacha
+  (159-1 modda, Ma'muriy javobgarlik kodeksi)
+
+MEHNAT SHARTNOMASI:
+  ⚠️ Fuqarolik shartnomasi bilan mehnat munosabatini
+  yashirish TAQIQLANADI. Agar "frilans shartnoma" deb
+  aslida xodim ishlasa — soliq va mehnat organlari
+  uni mehnat shartnomasi deb qayta kvalifikatsiya qiladi.
+  Oqibat: qo'shimcha soliq + jarima.
+
+ELEKTRON IMZO:
+  ⚠️ Ba'zi shartnomalar elektron raqamli imzo (ERI)
+  bilan tuzilishi mumkin. Lekin ERI faqat akkreditatsiya
+  qilingan markazlar (masalan, E-IMZO) dan olingan
+  bo'lishi shart.
+
+=====================================================
+III. AMALIY MASLAHATLAR (CHECKLIST)
+=====================================================
+
+SHARTNOMA IMZOLASHDAN OLDIN TEKSHIRING:
+
+☐ Kontragentni tekshirdimmi? (my.gov.uz, sud.uz)
+☐ Imzolayotgan shaxsning vakolatini ko'rdimmi?
+☐ Predmet, narx, muddat ANIQ yozilganmi?
+☐ Penya miqdorini YILLIK foizga aylantirib ko'rdimmi?
+☐ Bir tomonlama bekor qilish bandi YOKI ogohlantirishmi?
+☐ Fors-major bandi BORMI?
+☐ To'lov tartibi bosqichli mi (100% oldindan emasmi)?
+☐ Nizolarni hal qilish tartibi yozilganmi?
+☐ Ilovalar ro'yxati va rekvizitlar to'g'rimi?
+☐ Ikkala nusxa ham IMZOLANDI va MUHRLANDI mi?

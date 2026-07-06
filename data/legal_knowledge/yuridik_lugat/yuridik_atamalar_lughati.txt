@@ -1,0 +1,325 @@
+=====================================================
+YURIDIK ATAMALAR LUG'ATI
+Oddiy tilda tushuntirishlar
+=====================================================
+Mohiyat AI platformasi uchun | Manba: FK, MK, lex.uz
+
+=====================================================
+A
+=====================================================
+
+AKTSEPT (Акцепт / Acceptance)
+  Nima: Shartnoma taklifiga ROZILIK bildirish.
+  Oddiy tilda: Kimdir sizga "shu shartlarda ishlaymizmi?" deb so'radi.
+  Siz "ha, rozi" desangiz — bu aktsept. Shu paytdan shartnoma
+  tuzilgan hisoblanadi.
+  Qonun: FK, 366-modda.
+  Misol: Do'kon egasi "oyiga 5 mln ga ijaraga beraman" dedi.
+  Siz "roziman" desangiz — aktsept bo'ldi.
+
+ARBITRAJ SUDI (Арбитражный суд)
+  Nima: Biznes nizolarini hal qiladigan MAXSUS sud.
+  Oddiy tilda: Oddiy fuqarolar uchun fuqarolik sudi bor. 
+  Korxonalar va tadbirkorlar o'rtasidagi nizolar uchun 
+  IQTISODIY (arbitraj) sud bor. Agar shartnomada "nizo 
+  arbitraj sudida hal qilinadi" deb yozilsa — shu yerga 
+  borasiz.
+
+AYBSIZLIK PREZUMPSIYASI
+  Nima: Majburiyatni buzgan shaxs aybsiz deb hisoblanadi,
+  TO PAYTGACHA u AYB bor ekanini ISBOTLAMAGUNCHA.
+  Oddiy tilda: Agar shartnoma buzilsa — siz "men aybdor
+  emasligimni" isbotlashingiz kerak. Agar isbotlay olsangiz,
+  javobgarlikdan qutulasiz.
+  Qonun: FK, 333-modda.
+
+=====================================================
+D
+=====================================================
+
+DA'VO (Иск / Claim)
+  Nima: Sudga yozma murojaat — huquqlaringizni himoya qilish
+  uchun.
+  Oddiy tilda: Shartnoma buzildi, siz zarar ko'rdingiz.
+  Avval PRETENZIYA yozasiz. Javob kelmadi yoki rad qilindi.
+  Endi SUDGA DA'VO arizasi yozasiz.
+
+DALOLATNOMA (Акт)
+  Nima: Ishning bajarilganini yoki mulkning topshirilganini
+  tasdiqlovchi HUJJAT.
+  Oddiy tilda: Pudratchi uyingizni ta'mirlab berdi. Siz
+  "ha, ish bajarildi, sifati yaxshi" deb imzo chekasiz —
+  bu QABUL QILISH DALOLATNOMASINI. Bu juda muhim hujjat!
+  Agar dalolatnoma imzolamasangiz — pudratchi haqini
+  talab qila olmaydi. Agar imzolasangiz — keyin "ish
+  yomon bajarildi" deb da'vo qilish qiyinlashadi.
+
+=====================================================
+F
+=====================================================
+
+FORS-MAJOR (Форс-мажор / Force Majeure)
+  Nima: YENGIB BO'LMAYDIGAN KUCHLAR — oldindan ko'ra bilish
+  va oldini olish mumkin bo'lmagan favqulodda hodisalar.
+  Oddiy tilda: Zilzila bo'ldi, urush boshlandi, pandemiya
+  yuz berdi — bunda ikki tomon ham javobgar emas.
+  
+  ⚠️ FORS-MAJOR EMAS:
+    ❌ Bozorda narx ko'tarilishi
+    ❌ Kontragent o'z ishini bajarmasligi
+    ❌ Pul yetishmasligi
+    ❌ Xodim kasal bo'lishi
+  
+  ✅ FORS-MAJOR:
+    ✅ Tabiiy ofat (zilzila, suv toshqini)
+    ✅ Urush yoki harbiy harakatlar
+    ✅ Epidemiya/pandemiya (COVID kabi)
+    ✅ Hukumat qarorlari (embargo, sanksiyalar)
+  
+  Qonun: FK, 335-modda.
+  Muhim: O'zbekistonda fors-major sertifikati — Savdo-sanoat
+  palatasi tomonidan beriladi.
+
+=====================================================
+G
+=====================================================
+
+GAROV (Залог / Pledge)
+  Nima: Shartnoma bajarilishini ta'minlash usuli — qarz 
+  to'lanmasa, garovga qo'yilgan mulk kreditorga o'tadi.
+  Oddiy tilda: Bank sizga kredit berdi. Uyingizni garovga
+  qo'ydingiz. Kreditni to'lay olmasangiz — bank uyingizni
+  sotishi mumkin.
+  Qonun: FK, 264-modda.
+
+=====================================================
+I
+=====================================================
+
+IJARA (Аренда / Lease)
+  Nima: Mulkni MUDDATLI FOYDALANISHGA berish shartnomasi.
+  Oddiy tilda: Siz do'kon uchun joy ijaraga oldingiz. 
+  Ijaraga beruvchi — yer/bino egasi. Ijaraga oluvchi — siz.
+  Siz har oy ijara haqi to'laysiz. Muddat tugaganda —
+  mulkni qaytarasiz.
+  Qonun: FK, 535-630 moddalar.
+  
+  ⚠️ Muhim: Ko'chmas mulk ijarasi 1 yildan ortiq bo'lsa —
+  DAVLAT RO'YXATIDAN O'TISHI SHART.
+  
+  ⚠️ Muhim: Barcha ijara shartnomalari ijara.soliq.uz da
+  10 KUN ICHIDA ro'yxatga olinishi shart. Aks holda jarima.
+
+ISHONCHNOMA (Доверенность / Power of Attorney)
+  Nima: Bir shaxsga boshqa shaxs nomidan ish yuritish
+  HUQUQINI beruvchi hujjat.
+  Oddiy tilda: Siz safarda bo'ldingiz. Do'stingizga
+  "mening nomimdan shartnoma imzolashga ruxsat" deb
+  ishonchnoma berdingiz. Endi u sizning nomingizdan
+  imzo chekishi mumkin.
+  
+  ⚠️ DIQQAT: Agar shartnomani imzolayotgan shaxs
+  kompaniya DIREKTORI bo'lmasa — ishonchnoma SO'RANG!
+  Ishonchnomasiz imzolangan shartnoma — haqiqiy emas.
+
+=====================================================
+K
+=====================================================
+
+KAFILLIK (Поручительство / Surety)
+  Nima: Uchinchi shaxs (kafil) qarz oluvchining o'rniga
+  majburiyatni bajarish kafolatini berishi.
+  Oddiy tilda: Siz bankdan kredit olmoqchisiz. Pul
+  yetmaydi. Do'stingiz "agar u to'lay olmasa, MEN
+  to'layman" deb kafillik beradi.
+
+KONTRAGENT (Контрагент / Counterparty)
+  Nima: Shartnomadagi IKKINCHI TOMON.
+  Oddiy tilda: Siz shartnoma tuzdingiz. Sizning
+  qarshi tomoningiz — kontragent. Masalan: siz
+  xaridor bo'lsangiz, sotuvchi kontragent.
+
+=====================================================
+N
+=====================================================
+
+NEUSTOYKA (Неустойка / Penalty/Liquidated Damages)
+  Nima: Majburiyatni bajarmaganlik uchun to'lanadigan
+  JARIMA PULI. Ikki turi bor:
+  
+  1. JARIMA (SHTRAF) — bir martalik aniq summa
+     Misol: "Shartnoma buzilsa, 10 mln so'm jarima"
+  
+  2. PENYA — har kechiktirilgan KUN uchun foiz
+     Misol: "Kechiktirilgan har bir kun uchun 0.05%"
+  
+  Qonun: FK, 260-262 moddalar.
+  
+  ⚠️ ENG MUHIM:
+  - Neustoyka kelishuvi YOZMA bo'lishi SHART (262-modda)
+  - Agar penya juda katta bo'lsa — SUD KAMAYTIRISHI MUMKIN (326-modda)
+  
+  BOZOR STANDARTI:
+  - Normal penya: kuniga 0.03% — 0.1%
+  - Xavfli penya: kuniga 0.5% dan yuqori
+  - NOQONUNIY darajada katta: kuniga 3-5% (yiliga 1000%+)
+
+NOTARIUS TASDIG'I
+  Nima: Notarius tomonidan hujjatning haqiqiyligini
+  rasmiy tasdiqlash.
+  Oddiy tilda: Ba'zi shartnomalar (ko'chmas mulk sotish,
+  avtomobil sotish) notarius tasdig'isiz KUCHGA KIRMAYDI.
+  
+  ⚠️ Qachon SHART:
+  - Ko'chmas mulk oldi-sotdisi
+  - Avtotransport oldi-sotdisi
+  - Ishonchnomalar (ba'zilari)
+  - Meros masalalari
+  
+  Qachon shart EMAS:
+  - Oddiy ijara shartnomasi
+  - Xizmat ko'rsatish shartnomasi
+  - Pudrat shartnomasi
+
+=====================================================
+O
+=====================================================
+
+OFERTA (Оферта / Offer)
+  Nima: Shartnoma tuzish TAKLIFI. Shartnomaning barcha
+  muhim shartlarini o'z ichiga olishi kerak.
+  Oddiy tilda: "Shu narxda, shu muddatga, shu sharoitda
+  ishlaymizmi?" — bu oferta.
+  
+  OMMAVIY OFERTA:
+  Har qanday shaxsga ochiq taklif. Masalan: saytda yozilgan
+  xizmat shartlari — bu ommaviy oferta. Siz "roziman" deb
+  bosganingizda — shartnoma tuzilgan hisoblanadi.
+  Qonun: FK, 361-369 moddalar.
+
+=====================================================
+P
+=====================================================
+
+PENYA (Пеня / Penalty Interest)
+  Nima: To'lovni KECHIKTIRGANLIK uchun har KUN uchun
+  foiz hisobida undiriladi.
+  Oddiy tilda: Siz ijara haqini vaqtida to'lamadingiz.
+  Shartnomada "har kechiktirilgan kun uchun 0.05% penya"
+  deb yozilgan. 10 kun kechiktirsangiz — 0.5% penya
+  to'laysiz.
+  
+  ⚠️ HISOBLASH FORMULASI:
+  Penya = Qarz summasi × Penya foizi × Kechiktirilgan kunlar soni
+  
+  MISOL:
+  Qarz: 10,000,000 so'm
+  Penya: kuniga 0.05%
+  Kechikish: 30 kun
+  Penya = 10,000,000 × 0.0005 × 30 = 150,000 so'm
+  
+  ⚠️ XAVFLI MISOL:
+  Xuddi shu qarz, lekin penya kuniga 5%:
+  Penya = 10,000,000 × 0.05 × 30 = 15,000,000 so'm (!!!)
+  Bu QARZDAN HAM KATTA! Sud buni kamaytiradi (326-modda).
+
+PRETENZIYA (Претензия / Pre-trial Claim)
+  Nima: Sudga borishdan OLDIN qarshi tomonga yuboriladigan
+  YOZMA TALAB.
+  Oddiy tilda: Shartnoma buzildi. Sudga borsam bo'ladimi?
+  YO'Q — avval PRETENZIYA xat yozishingiz kerak.
+  "Siz shartnomani buzdingiz, men shuncha zarar ko'rdim,
+  30 kun ichida tuzating" deb yozasiz.
+  
+  30 KUN javob kelmasa YOKI rad javob kelsa — ENDI sudga
+  murojaat qilishingiz mumkin.
+  
+  ⚠️ PRETENZIYASIZ sudga borsa — sud arizani QAYTARADI!
+  Qonun: FK, 385-modda.
+
+=====================================================
+R
+=====================================================
+
+REKVIZITLAR (Реквизиты / Details/Credentials)
+  Nima: Shartnomaning oxirida yoziladigan TARAFLAR
+  MA'LUMOTLARI.
+  Oddiy tilda: Shartnoma oxirida ikkala tomon haqida
+  to'liq ma'lumot yoziladi.
+  
+  YURIDIK SHAXS UCHUN:
+  - To'liq nomi (MChJ "XXX")
+  - Manzili (yuridik va haqiqiy)
+  - INN (STIR) — soliq identifikatsiya raqami
+  - Bank hisobi raqami
+  - MFO (bank kodi)
+  - OKED (faoliyat turi kodi)
+  - Direktor ismi
+  
+  JISMONIY SHAXS UCHUN:
+  - F.I.O.
+  - Pasport seriyasi va raqami
+  - PINFL (shaxsiy identifikatsiya raqami)
+  - Yashash manzili
+  - Telefon raqami
+  
+  ⚠️ MUHIM: Rekvizitlar noto'g'ri yozilsa — to'lov
+  o'tkazish muammo bo'ladi va shartnoma kuchi ham
+  savol ostiga tushishi mumkin.
+
+=====================================================
+S
+=====================================================
+
+SOLID (BIRGA) JAVOBGARLIK (Солидарная ответственность)
+  Nima: Bir nechta shaxs BIRGA javobgar — kreditor
+  ulardan ISTALGANIDAN to'liq summani talab qilishi mumkin.
+  Oddiy tilda: Uch do'st birga kredit oldi. Bank
+  ISTALGAN BIRINGIZDAN butun qarzni talab qilishi mumkin.
+  Biri to'lasa — qolgan ikkitasidan o'z hissasini
+  qaytarib olish o'z muammosi.
+
+SMETA (Смета / Estimate)
+  Nima: Ishning batafsil xarajatlar HISOBI.
+  Oddiy tilda: Uy qurilyapti. Smeta — har bir material,
+  har bir ish qancha turishi yozilgan hujjat.
+  Pudrat shartnomasida smeta bo'lsa — narx SMETAGA
+  asoslanadi (FK, 641-modda).
+
+=====================================================
+V
+=====================================================
+
+VAKOLAT (Полномочия / Authority)
+  Nima: Biror shaxsning boshqa shaxs nomidan ISH
+  YURITISH HUQUQI.
+  Oddiy tilda: Kompaniya direktori — shartnoma
+  imzolashga VAKOLATLI. Boshqa xodim — faqat
+  ISHONCHNOMA bilan.
+  
+  ⚠️ DIQQAT: Shartnomani imzolayotgan shaxsning
+  vakolatini TEKSHIRING! Aks holda shartnoma
+  HAQIQIY EMAS bo'lib qolishi mumkin.
+
+=====================================================
+Z
+=====================================================
+
+ZARAR (Убытки / Damages)
+  Nima: Majburiyat buzilishi natijasida yetkazilgan
+  moddiy yo'qotish. Ikki turi bor:
+  
+  1. REAL ZARAR — haqiqatda yetkazilgan zarar
+     Misol: Sifatsiz material ishlatildi, bino darz ketdi,
+     ta'mirlash uchun 50 mln sarflandi — bu real zarar.
+  
+  2. BOY BERILGAN FOYDA — majburiyat buzilmasa
+     olinishi mumkin bo'lgan daromad
+     Misol: Yetkazib beruvchi tovarni kechiktirdi, siz
+     3 kun savdo qila olmadingiz, kuniga 5 mln daromad
+     bo'yberildi — bu boy berilgan foyda.
+  
+  Qonun: FK, 324-modda.
+  
+  ⚠️ MUHIM: Zararni talab qilish uchun uni ISBOTLASH kerak!
+  Hujjatlar, kvitansiyalar, hisobotlar saqlang.

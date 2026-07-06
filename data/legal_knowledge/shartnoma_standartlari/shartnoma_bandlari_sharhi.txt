@@ -1,0 +1,231 @@
+=====================================================
+SHARTNOMA BANDLARI SHARHI
+Har bir band nimani anglatadi — oddiy tilda
+=====================================================
+Mohiyat AI platformasi uchun tayyorlangan
+
+=====================================================
+I. IJARA SHARTNOMASI BANDLARI SHARHI
+=====================================================
+
+📌 "SHARTNOMA PREDMETI" BANDI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Bu nima: Shartnomaning ASOSIY MAQSADI — nima ijaraga beriladi.
+Nima yozilishi kerak:
+  - Mulkning to'liq manzili
+  - Maydoni (kv.m hisobida)
+  - Xonalar soni
+  - Qavat raqami
+  - Mulkning holati (ta'mirli/ta'mirsiz)
+Nima uchun muhim: Agar aniq yozilmasa — ijaraga beruvchi
+kichikroq xona berishi yoki boshqa manzilga ko'chirishi mumkin.
+Qonun: FK, 535-modda.
+
+📌 "IJARA MUDDATI" BANDI
+━━━━━━━━━━━━━━━━━━━━━━━━
+Bu nima: Ijara qancha davom etishi.
+Bilish kerak:
+  - Muddat ko'rsatilMASA — shartnoma MUDDATSIZ hisoblanadi
+  - 1 yildan ortiq — yozma shakl va davlat ro'yxati SHART
+  - "Avtomatik uzaytirish" — muddat tugaganda avtomatik
+    yana 1 yilga uzayadi (agar rad yozmasa)
+Maslahat: 1 yilga tuzing + avtomatik uzaytirish. Bu
+ikki tomonga ham qulay — istalgan vaqt rad yozish mumkin.
+Qonun: FK, 537-modda.
+
+📌 "IJARA HAQI" BANDI
+━━━━━━━━━━━━━━━━━━━
+Bu nima: Har oyda qancha pul to'lanadi.
+Bilish kerak:
+  - Summa ANIQ ko'rsatilishi shart (raqam va so'z bilan)
+  - To'lov MUDDATI (har oyning necha-sanasigacha)
+  - To'lov USULI (naqd, bank o'tkazmasi, kartaga)
+  - Ijara haqi BIR TOMONLAMA oshirilishi MUMKIN EMAS
+Xavf: "Ijara haqi bozor narxiga qarab o'zgartirilishi mumkin"
+— bu XAVFLI band! Yer egasi narxni 2x oshirishi mumkin.
+Maslahat: "Ijara haqi shartnoma muddati davomida o'zgarmaydi"
+yoki "yiliga 1 marta, inflatsiya darajasida oshirilishi mumkin"
+deb yozing.
+Qonun: FK, 544, 611-moddalar.
+
+📌 "KOMMUNAL TO'LOVLAR" BANDI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Bu nima: Elektr, gaz, suv, internet — kim to'laydi?
+Bilish kerak:
+  - ANIQ yozilishi kerak — ijara haqiga KIRADI yoki KIRITILMAYDI
+  - Agar yozilmasa — nizo chiqadi
+Maslahat: 
+  Variant A: "Kommunal to'lovlar ijara haqiga kiritilgan"
+  Variant B: "Kommunal to'lovlar ijaraga oluvchi tomonidan
+  alohida to'lanadi (hisoblagich bo'yicha)"
+
+📌 "TA'MIRLASH" BANDI
+━━━━━━━━━━━━━━━━━━━
+Bu nima: Kim ta'mir qiladi — ijarachi yoki yer egasi?
+Bilish kerak:
+  - JORIY TA'MIR — kichik tuzatishlar (kran, lampochka)
+    Odatda IJARACHI zimmasida
+  - KAPITAL TA'MIR — katta ishlar (tom, quvur almashtirish)
+    Odatda IJARAGA BERUVCHI zimmasida
+Xavf: "Barcha ta'mir ijarachi hisobiga" — bu XAVFLI!
+Agar tom oqsa — siz 50 million so'mlik ta'mir qilasizmi?
+Qonun: FK, 543-modda.
+
+📌 "BEKOR QILISH TARTIBI" BANDI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Bu nima: Shartnomani qanday tugatish mumkin.
+Bilish kerak:
+  - IKKI TOMONLAMA — ikkalasi rozi bo'lsa
+  - BIR TOMONLAMA — faqat qonunda belgilangan hollarda
+  - OGOHLANTIRISHSIZ — juda XAVFLI!
+Maslahat: Kamida 30 kun oldindan yozma ogohlantirish shart.
+Agar biznes uchun muhim joy bo'lsa — 60-90 kun.
+Qonun: FK, 615-modda.
+
+📌 "PENYA" BANDI
+━━━━━━━━━━━━━━
+Bu nima: To'lovni kechiktirganlik uchun jarima.
+Bilish kerak:
+  HISOBLASH: Qarz × Foiz × Kunlar soni
+  MISOL: 10 mln × 0.05% × 30 kun = 150,000 so'm (NORMAL)
+  MISOL: 10 mln × 5% × 30 kun = 15,000,000 so'm (NOQONUNIY!)
+Maslahat: Kuniga 0.03-0.05% — bozor standarti.
+Kuniga 1% dan yuqori — SUD KAMAYTIRADI.
+Qonun: FK, 260-262, 326-moddalar.
+
+=====================================================
+II. MEHNAT SHARTNOMASI BANDLARI SHARHI
+=====================================================
+
+📌 "LAVOZIM VA VAZIFALAR" BANDI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Bu nima: Siz qaysi lavozimda va nima ish qilasiz.
+Bilish kerak:
+  - Lavozim nomi ANIQ yozilishi shart
+  - Vazifalar ro'yxati yoki lavozim yo'riqnomasiga havola
+Xavf: "Va boshqa topshirilgan ishlarni bajarish" — bu
+XAVFLI! Ish beruvchi sizga har qanday ishni topshirishi mumkin.
+Maslahat: Vazifalar ANIQ ro'yxat qilinsin.
+
+📌 "ISH HAQI" BANDI
+━━━━━━━━━━━━━━━━━
+Bu nima: Siz qancha pul olasiz.
+Bilish kerak:
+  - Maosh ANIQ RAQAM bilan yozilishi shart
+  - "Kelishuvga ko'ra" — QABUL QILMANG!
+  - Qo'shimcha to'lovlar (bonus, ustama) ham yozilishi kerak
+  - To'lov muddati — oyiga kamida 2 MARTA
+Xavf: "Maosh ish beruvchi qaroriga ko'ra belgilanadi" — bu
+NOQONUNIY. Maosh shartnomada ANIQ ko'rsatilishi SHART.
+Qonun: MK, 104-modda, 244, 253-moddalar.
+
+📌 "ISH VAQTI" BANDI
+━━━━━━━━━━━━━━━━━━
+Bu nima: Kuniga va haftasiga necha soat ishlaysiz.
+QONUNIY CHEGARALAR:
+  - Haftasiga MAX 40 soat
+  - Kuniga MAX 8 soat
+  - Overtaym uchun MIN 2x haq
+Xavf: "Xodim zarur bo'lsa, dam olish kunlarida ham
+ishlaydi, qo'shimcha haq talab qilmaydi" — bu NOQONUNIY!
+Qonun: MK, 181-182, 257-moddalar.
+
+📌 "SINOV MUDDATI" BANDI
+━━━━━━━━━━━━━━━━━━━━━━
+Bu nima: Ish beruvchi sizni "sinab ko'rish" muddati.
+Bilish kerak:
+  - MAX 3 oy (oddiy xodim)
+  - MAX 6 oy (rahbar lavozim)
+  - Sinov davrida HAM barcha huquqlar saqlanadi
+  - Sinov davrida HAM ish haqi to'liq to'lanadi
+Xavf: "Sinov muddati 1 yil" — NOQONUNIY!
+"Sinov davrida ish haqi 50%" — NOQONUNIY!
+
+📌 "ISHDAN BO'SHATISH" BANDI
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+Bu nima: Shartnoma qanday tugatiladi.
+Bilish kerak:
+  XODIM: 14 kun oldindan ariza berishi shart
+  ISH BERUVCHI: faqat QONUNIY ASOSLARDA (tashkilot
+  tugatilishi, qisqartirish, intizom buzilishi)
+Xavf: "Ish beruvchi istalgan vaqt ishdan bo'shatishi mumkin"
+— bu NOQONUNIY! MK 104-modda — xodim holatini
+yomonlashtiruvchi shartlar kuchga ega emas.
+
+=====================================================
+III. PUDRAT SHARTNOMASI BANDLARI SHARHI
+=====================================================
+
+📌 "ISH PREDMETI VA HAJMI" BANDI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Bu nima: ANIQ nima bajariladi.
+Bilish kerak:
+  - Texnik topshiriq yoki loyiha-smeta ILOVA qilinishi shart
+  - "Umumiy ta'mirlash ishlari" — juda NOANIQ!
+  - "Devorlarni suvash (120 kv.m), bo'yash (120 kv.m), 
+    polni laminat qoplash (45 kv.m)" — ANIQ!
+Maslahat: Texnik topshiriqni ILOVA qiling.
+
+📌 "MATERIAL" BANDI
+━━━━━━━━━━━━━━━━
+Bu nima: Material kim ta'minlaydi.
+Bilish kerak:
+  Variant A: Pudratchi o'z materialidan ishlaydi (narxga kiritilgan)
+  Variant B: Buyurtmachi material beradi (narxda faqat ish haqqi)
+Xavf: Agar aniq yozilmasa — pudratchi arzon material
+ishlatib, qimmat pul olishi mumkin.
+
+📌 "QABUL QILISH" BANDI
+━━━━━━━━━━━━━━━━━━━━━
+Bu nima: Ish bajarilgandan keyin qanday qabul qilinadi.
+Bilish kerak:
+  - DALOLATNOMA imzolanishi SHART
+  - Dalolatnomasiz — pudratchi haq talab qila olmaydi
+  - Dalolatnomasiz — buyurtmachi ish yomon bajarildi deyishi qiyin
+Maslahat: Dalolatnomani DIQQAT BILAN o'qing va imzolang.
+Agar nuqson bo'lsa — ALBATTA yozing!
+
+📌 "KAFOLAT" BANDI
+━━━━━━━━━━━━━━━
+Bu nima: Ish bajarilgandan keyin pudratchi javobgarligi.
+Bilish kerak:
+  - Qurilish ishlari — 2-5 yil kafolat (odatda)
+  - Ta'mirlash — 6-12 oy
+  - Kafolat davrida nuqson chiqsa — pudratchi BEPUL tuzatadi
+Xavf: "Kafolat berilmaydi" — QABUL QILMANG!
+
+=====================================================
+IV. UMUMIY MUHIM BANDLAR SHARHI
+=====================================================
+
+📌 "FORS-MAJOR" BANDI
+━━━━━━━━━━━━━━━━━━━
+Bu nima: Kutilmagan hodisalar bo'lsa nima bo'ladi.
+Bilish kerak:
+  - ALBATTA shartnomada bo'lishi kerak
+  - Qanday hodisalar kirishi aniq yozilishi kerak
+  - Ta'sirlangan tomon 3-5 ish kuni ichida xabar berishi shart
+  - O'zbekistonda fors-major sertifikatini Savdo-sanoat
+    palatasi beradi
+
+📌 "MAXFIYLIK" BANDI (NDA)
+━━━━━━━━━━━━━━━━━━━━━━━━
+Bu nima: Shartnoma shartlarini oshkor qilmaslik majburiyati.
+Bilish kerak:
+  - IT va konsalting shartnomalarida juda muhim
+  - Qancha muddat sirlilik saqlanishi kerak (1-3 yil)
+  - Buzilsa qanday jarima to'lanishi
+Maslahat: Agar biznes sirlari bilan ishlasangiz — ALBATTA qo'shing.
+
+📌 "INTELLEKTUAL MULK" BANDI
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+Bu nima: Kim yaratgan narsaning EGASI kim?
+Bilish kerak (ayniqsa IT/Dizayn uchun):
+  - Dasturchi kod yozdi — kod kimning mulki?
+  - Dizayner logo chizdi — logo kimning mulki?
+Xavf: "Barcha yaratilgan materiallar buyurtmachi mulki" — bu
+frilanser uchun XAVFLI! Siz o'zingiz yaratgan narsani
+boshqa mijozga sata olmaysiz.
+Maslahat: "Buyurtmachi uchun maxsus yaratilgan materiallar
+buyurtmachiga o'tadi. Umumiy vositalar va kutubxonalar
+ijrochining mulki bo'lib qoladi" — bu ADOLATLI variant.

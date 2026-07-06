@@ -1,0 +1,223 @@
+=====================================================
+SHARTNOMA STANDARTLARI VA MAJBURIY SHARTLAR
+Har bir shartnoma turida NIMA BO'LISHI SHART
+=====================================================
+Manba: FK, MK, lex.uz, norma.uz, advice.uz
+
+=====================================================
+I. UMUMIY QOIDALAR — BARCHA SHARTNOMALAR UCHUN
+=====================================================
+
+Har qanday shartnomada quyidagilar bo'lishi SHART:
+
+1. SARLAVHA va RAQAM
+   - Shartnoma turi (Ijara/Pudrat/Oldi-sotdi/Mehnat)
+   - Shartnoma raqami
+   - Tuzilgan sana va joy
+
+2. TARAFLAR
+   - To'liq nomi (MChJ nomi yoki F.I.O.)
+   - Kim nomidan harakat qiladi (Ustav/Ishonchnoma asosida)
+   - STIR (INN), bank rekvizitlari
+
+3. PREDMET (nima haqida)
+   - Shartnomaning ASOSIY MAQSADI
+   - Aniq tovar/xizmat/ish nomi va tavsifi
+
+4. NARX VA TO'LOV TARTIBI
+   - Aniq summa (raqam va so'z bilan)
+   - Valyuta (so'm/dollar)
+   - To'lov muddati va usuli
+   - Oldindan to'lov bo'lsa — miqdori va muddati
+
+5. MUDDAT
+   - Boshlanish va tugash sanasi
+   - Uzaytirish (prolongsiya) shartlari
+
+6. TARAFLARNING HUQUQ VA MAJBURIYATLARI
+   - Har bir tomon nima qilishi SHART
+   - Har bir tomon nimaga HAQLI
+
+7. JAVOBGARLIK
+   - Majburiyat buzilsa nima bo'ladi
+   - Penya/jarima miqdori
+   - Zarar qoplash tartibi
+
+8. NIZOLARNI HAL QILISH TARTIBI
+   - Pretenziya (sudgacha) tartibi
+   - Qaysi sudda hal qilinadi
+
+9. FORS-MAJOR
+   - Qanday holatlarda javobgarlikdan ozod
+   - Xabardor qilish muddati
+
+10. YAKUNIY QOIDALAR
+    - Shartnoma nechta nusxada tuzilgan
+    - Ilovalar ro'yxati
+    - Taraflar rekvizitlari va imzolari
+
+=====================================================
+II. IJARA SHARTNOMASI STANDARTI
+(FK, 535-630 moddalar)
+=====================================================
+
+MAJBURIY BANDLAR:
+  1. Ijara OBYEKTI — aniq manzil, maydon (kv.m), xonalar soni
+  2. Ijara MUDDATI — boshlanish va tugash sanasi
+  3. Ijara HAQI — oylik miqdori, to'lov muddati, usuli
+  4. KOMMUNAL to'lovlar — kim to'laydi (ijaraga beruvchi yoki oluvchi)
+  5. TA'MIRLASH — joriy va kapital ta'mir kim zimmasida
+  6. BEKOR QILISH tartibi — necha kun oldindan xabar berish kerak
+  7. QAYTARISH sharti — mulk qanday holatda qaytariladi
+
+BOZOR STANDARTI (Normal shartnoma):
+  ┌──────────────────────────────────────────────┐
+  │ PENYA:     kuniga 0.03% — 0.05%             │
+  │ XABAR:     kamida 30 kun oldindan            │
+  │ TO'LOV:    har oyning 5-sanasigacha          │
+  │ TA'MIR:    joriy — ijarachi, kapital — egasi │
+  │ MUDDAT:    1 yil + avtomatik uzaytirish      │
+  └──────────────────────────────────────────────┘
+
+XAVFLI BELGILAR (Red Flags):
+  ⚠️ Penya kuniga 1% dan yuqori
+  ⚠️ Bir tomonlama bekor qilish (ogohlantirishsiz)
+  ⚠️ Barcha zarar faqat ijarachiga yuklanadi
+  ⚠️ Fors-major bandi yo'q
+  ⚠️ Ijara haqi bir tomonlama oshirilishi mumkin
+  ⚠️ Ijarachi o'z hisobidan kapital ta'mir qilishi shart
+  ⚠️ Ijaraga beruvchi istalgan vaqt tekshirishi mumkin
+
+SOLIQ TALABI:
+  ⚠️ Barcha ijara shartnomalari ijara.soliq.uz da
+  10 KUN ICHIDA ro'yxatga olinishi SHART!
+  Aks holda: BHM ning 5-10 baravari jarima (159-1 modda).
+
+=====================================================
+III. MEHNAT SHARTNOMASI STANDARTI
+(Yangi MK 2023, 104-modda)
+=====================================================
+
+MAJBURIY BANDLAR:
+  1. ISH JOYI — tashkilot nomi va aniq bo'linma
+  2. LAVOZIM — kasb/mutaxassislik nomi
+  3. BOSHLANISH SANASI — aniq kalendar kuni
+  4. ISH HAQI — maosh/tarif + qo'shimchalar (aniq raqam!)
+  5. ISH VAQTI — kuniga/haftasiga soat
+  6. DAM OLISH — haftalik dam olish kunlari
+  7. TA'TIL — yillik ta'til muddati
+  8. SINOV MUDDATI — bor yoki yo'q (max 3 oy)
+  9. SHARTNOMA MUDDATI — muddatsiz yoki muddatli + sababi
+
+BOZOR STANDARTI:
+  ┌──────────────────────────────────────────────┐
+  │ ISH VAQTI:    haftasiga 40 soat, kuniga 8    │
+  │ DAM OLISH:    haftasiga 2 kun (shanba, yakshanba)│
+  │ TA'TIL:       yillik 15 ish kuni              │
+  │ OVERTAYM:     kamida 2x haq                    │
+  │ SINOV:        1-3 oy (rahbarlar uchun 6 oy)   │
+  │ ISH HAQI:     oyiga 2 marta                    │
+  │ BO'SHATISH:   14 kun oldindan ariza             │
+  └──────────────────────────────────────────────┘
+
+XAVFLI BELGILAR (Red Flags):
+  ⚠️ Ish vaqti kuniga 10+ soat
+  ⚠️ "Overtaym uchun qo'shimcha haq yo'q"
+  ⚠️ "Ta'til faqat ish beruvchi ruxsati bilan"
+  ⚠️ "Ish beruvchi istalgan vaqt bo'shatishi mumkin"
+  ⚠️ Sinov muddati 6 oydan ortiq (oddiy xodim uchun)
+  ⚠️ Ish haqi miqdori aniq ko'rsatilmagan
+  ⚠️ "Ish beruvchi maoshi kamaytirishi mumkin"
+  ⚠️ Raqobatlashmaslik bandi (Uzbekistonda kuchi yo'q)
+
+=====================================================
+IV. PUDRAT SHARTNOMASI STANDARTI
+(FK, 631-702 moddalar)
+=====================================================
+
+MAJBURIY BANDLAR:
+  1. ISH PREDMETI — aniq nima bajariladi
+  2. ISH HAJMI — texnik topshiriq yoki smeta
+  3. MUDDAT — boshlanish va tugash sanasi
+  4. NARX — aniq summa yoki smeta asosida
+  5. MATERIAL — kim ta'minlaydi (pudratchi yoki buyurtmachi)
+  6. SIFAT — standartlar, texnik talablar
+  7. KAFOLAT — kafolat muddati (ish tugatilgandan keyin)
+  8. QABUL QILISH — dalolatnoma bilan
+
+BOZOR STANDARTI:
+  ┌──────────────────────────────────────────────┐
+  │ OLDINDAN TO'LOV:  20-30% (boshlash uchun)    │
+  │ ORALIQ TO'LOV:    40-50% (ish davomida)      │
+  │ YAKUNIY TO'LOV:   20-30% (topshirilgandan keyin)│
+  │ KAFOLAT:          6-12 oy                     │
+  │ PENYA:            kuniga 0.05-0.1%            │
+  │ MUDDAT:           texnik topshiriqga asosan    │
+  └──────────────────────────────────────────────┘
+
+XAVFLI BELGILAR (Red Flags):
+  ⚠️ 100% oldindan to'lov
+  ⚠️ Kafolat muddati ko'rsatilmagan
+  ⚠️ Sifat standartlari belgilanmagan
+  ⚠️ Faqat pudratchi javobgar, buyurtmachi emas
+  ⚠️ Muddat o'zgarishi uchun faqat buyurtmachi haqli
+  ⚠️ Dalolatnoma imzolanmasa ham to'lov so'rash
+
+=====================================================
+V. XIZMAT KO'RSATISH SHARTNOMASI STANDARTI
+(FK, 703-710 moddalar)
+=====================================================
+
+MAJBURIY BANDLAR:
+  1. XIZMAT TURI — aniq nima ko'rsatiladi
+  2. XIZMAT HAJMI — miqdori va tartibi
+  3. MUDDAT — boshlanish va tugash
+  4. NARX — aniq summa yoki birlik narxi
+  5. SIFAT — baholash mezonlari
+  6. NATIJA — xizmatning qabul qilish tartibi
+
+BOZOR STANDARTI:
+  ┌──────────────────────────────────────────────┐
+  │ TO'LOV:      xizmat ko'rsatilgandan keyin     │
+  │ BEKOR QILISH: buyurtmachi istalgan vaqt mumkin │
+  │              (ko'rsatilgan xizmat uchun haq to'laydi)│
+  │ MAXFIYLIK:   agar kerak bo'lsa — alohida band  │
+  │ PENYA:       kuniga 0.03-0.05%                 │
+  └──────────────────────────────────────────────┘
+
+XAVFLI BELGILAR (Red Flags):
+  ⚠️ Xizmat turi noaniq ("barcha xizmatlar")
+  ⚠️ Ijrochi bekor qila olmaydi, faqat buyurtmachi mumkin
+  ⚠️ Intellektual mulk to'liq buyurtmachiga o'tadi (IT/dizayn)
+  ⚠️ Raqobatlashmaslik bandi (1 yildan ortiq)
+
+=====================================================
+VI. OLDI-SOTDI SHARTNOMASI STANDARTI
+(FK, 386-496 moddalar)
+=====================================================
+
+MAJBURIY BANDLAR:
+  1. TOVAR — nomi, sifati, miqdori (SHART!)
+  2. NARX — aniq summa
+  3. YETKAZISH — muddati va joyi
+  4. MULK O'TISHI — qaysi momentda mulk xaridorga o'tadi
+  5. XAVF O'TISHI — qaysi momentda zarar xavfi o'tadi
+  6. SIFAT KAFOLATI — muddati va shartlari
+  7. DA'VO MUDDATI — sifatsiz tovar uchun
+
+BOZOR STANDARTI:
+  ┌──────────────────────────────────────────────┐
+  │ MULK O'TISHI: tovar topshirilgan paytda       │
+  │ TO'LOV:       tovar yetkazilgandan keyin 5-10 kun│
+  │ KAFOLAT:      6-12 oy                         │
+  │ DA'VO MUDDATI: sifat uchun 14 kun             │
+  │ PENYA:        kuniga 0.03-0.05%               │
+  │ QAYTARISH:    sifatsiz bo'lsa 14 kun ichida    │
+  └──────────────────────────────────────────────┘
+
+XAVFLI BELGILAR (Red Flags):
+  ⚠️ "Tovar qaytarilmaydi" (sifatsiz bo'lsa ham)
+  ⚠️ 100% oldindan to'lov
+  ⚠️ Kafolat yo'q yoki 1 oydan kam
+  ⚠️ Xavf sotuvchidan xaridorga oldindan o'tadi
+  ⚠️ Sotuvchi javobgarligi cheklangan

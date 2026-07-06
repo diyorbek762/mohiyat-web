@@ -1,0 +1,14 @@
+[
+  {
+    "session_id": "c4be254e-b0b3-4e8c-8732-c74fc198726d",
+    "user_id": "612e8a2f-2447-4fa2-98b7-d3a7a0bc9cff",
+    "role": "user",
+    "content": "Salom, ushbu shartnomadagi eng katta xavf nima?"
+  },
+  {
+    "session_id": "c4be254e-b0b3-4e8c-8732-c74fc198726d",
+    "user_id": "612e8a2f-2447-4fa2-98b7-d3a7a0bc9cff",
+    "role": "assistant",
+    "content": "Assalomu alaykum! Ushbu shartnomadagi eng katta xavf 3.2-banddagi asossiz katta jarima (penya) miqdoridir. Uni O'zbekiston qonunchiligiga mos ravishda 0.1% ga tushirishni tavsiya qilaman."
+  }
+]
