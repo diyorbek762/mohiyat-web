@@ -196,12 +196,13 @@ ${specificRules}`;
     } catch (geminiError: any) {
       console.warn("Gemini Failed. Falling back to OpenRouter. Error:", geminiError.message);
       
-      // Prepare message for OpenRouter (supports images natively now)
       let openRouterMessages: any[] = [];
       if (documentText) {
+        // Truncate to ~100,000 characters (approx 25,000 tokens) to prevent context length errors
+        const truncatedText = documentText.substring(0, 100000);
         openRouterMessages = [
           { role: "system", content: dynamicInstruction },
-          { role: "user", content: `Ushbu hujjatni tahlil qiling va xavflarni aniqlang:\n\n${documentText}` }
+          { role: "user", content: `Ushbu hujjatni tahlil qiling va xavflarni aniqlang:\n\n${truncatedText}${documentText.length > 100000 ? '\n\n[DIQQAT: Hujjat juda uzun bo\'lgani uchun faqat boshlang\'ich qismi tahlil qilindi]' : ''}` }
         ];
       } else if (file.type.startsWith("image/")) {
         openRouterMessages = [
