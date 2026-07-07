@@ -23,6 +23,8 @@ export interface ScanResult {
   page_count: number;
   processing_ms: number;
   model_used: string;
+  is_scam?: boolean;
+  scam_details?: string;
 }
 
 export interface FullReport {

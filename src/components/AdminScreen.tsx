@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Users, Gift, Bell, FileCode, Mail, Search, Plus, Trash2, 
-  CheckCircle, Loader2, DollarSign, Database
+  CheckCircle, Loader2, DollarSign, Database, AlertTriangle
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import CustomDialog from './CustomDialog';
@@ -31,15 +31,15 @@ export default function AdminScreen() {
   const [emailSubject, setEmailSubject] = useState('');
   const [emailBody, setEmailBody] = useState('');
 
-  // Rules State
-  const [rules, setRules] = useState<any[]>([]);
-  const [editingRule, setEditingRule] = useState<any>(null);
-  const [isCreatingRule, setIsCreatingRule] = useState(false);
+  // Scams State
+  const [scams, setScams] = useState<any[]>([]);
+  const [editingScam, setEditingScam] = useState<any>(null);
+  const [isCreatingScam, setIsCreatingScam] = useState(false);
 
   // Dialog State
   const [coinDialog, setCoinDialog] = useState<{isOpen: boolean, userId: string | null}>({ isOpen: false, userId: null });
   const [errorDialog, setErrorDialog] = useState<{isOpen: boolean, message: string}>({ isOpen: false, message: '' });
-  const [deleteRuleDialog, setDeleteRuleDialog] = useState<{isOpen: boolean, doc_type: string | null}>({ isOpen: false, doc_type: null });
+  const [deleteScamDialog, setDeleteScamDialog] = useState<{isOpen: boolean, scam_id: string | null}>({ isOpen: false, scam_id: null });
 
   // Fetch functions based on tab
   useEffect(() => {
@@ -62,10 +62,10 @@ export default function AdminScreen() {
         const { data, error } = await supabase.from('app_alerts').select('*').order('created_at', { ascending: false });
         if (error) throw error;
         setAlerts(data || []);
-      } else if (activeTab === 'rules') {
-        const { data, error } = await supabase.from('document_rules').select('*').order('doc_type', { ascending: true });
+      } else if (activeTab === 'scams') {
+        const { data, error } = await supabase.from('scam_patterns').select('*').order('created_at', { ascending: false });
         if (error) throw error;
-        setRules(data || []);
+        setScams(data || []);
       }
     } catch (e: any) {
       setErrorMsg(e.message);
@@ -178,28 +178,32 @@ export default function AdminScreen() {
     }
   };
 
-  const handleSaveRule = async () => {
-    if (!editingRule) return;
+  const handleSaveScam = async () => {
+    if (!editingScam) return;
     try {
       setLoading(true);
       
-      // Upsert (Insert or Update)
+      const payload: any = { 
+        title: editingScam.title,
+        description: editingScam.description,
+        real_example: editingScam.real_example,
+        match_criteria: editingScam.match_criteria,
+        severity: editingScam.severity || 'high',
+        is_active: true
+      };
+
+      if (editingScam.id) {
+        payload.id = editingScam.id;
+      }
+
       const { error } = await supabase
-        .from('document_rules')
-        .upsert({ 
-          doc_type: editingRule.doc_type,
-          label: editingRule.label || editingRule.doc_type,
-          description: editingRule.description || '',
-          icon_name: editingRule.icon_name || 'FileText',
-          color_gradient: editingRule.color_gradient || 'from-slate-500 to-slate-700',
-          rules_text: editingRule.rules_text,
-          is_active: true
-        });
+        .from('scam_patterns')
+        .upsert(payload);
         
       if (error) throw error;
-      setEditingRule(null);
-      setIsCreatingRule(false);
-      showSuccess("Muvaffaqiyatli saqlandi!");
+      setEditingScam(null);
+      setIsCreatingScam(false);
+      showSuccess("Firibgarlik sxemasi saqlandi!");
       fetchData();
     } catch (e: any) {
       alert("Xato: " + e.message);
@@ -208,21 +212,21 @@ export default function AdminScreen() {
     }
   };
 
-  const handleDeleteRule = (doc_type: string) => {
-    setDeleteRuleDialog({ isOpen: true, doc_type });
+  const handleDeleteScam = (scam_id: string) => {
+    setDeleteScamDialog({ isOpen: true, scam_id });
   };
 
-  const handleConfirmDeleteRule = async () => {
-    if (!deleteRuleDialog.doc_type) return;
+  const handleConfirmDeleteScam = async () => {
+    if (!deleteScamDialog.scam_id) return;
     setLoading(true);
     try {
-      const { error } = await supabase.from('document_rules').delete().eq('doc_type', deleteRuleDialog.doc_type);
+      const { error } = await supabase.from('scam_patterns').delete().eq('id', deleteScamDialog.scam_id);
       if (error) throw error;
-      showSuccess("Hujjat turi o'chirildi!");
-      setDeleteRuleDialog({ isOpen: false, doc_type: null });
+      showSuccess("Sxema o'chirildi!");
+      setDeleteScamDialog({ isOpen: false, scam_id: null });
       fetchData();
     } catch (e: any) {
-      setDeleteRuleDialog({ isOpen: false, doc_type: null });
+      setDeleteScamDialog({ isOpen: false, scam_id: null });
       setErrorDialog({ isOpen: true, message: e.message || "O'chirishda xatolik yuz berdi" });
     } finally {
       setLoading(false);
@@ -360,116 +364,97 @@ export default function AdminScreen() {
     </div>
   );
 
-  const renderRules = () => (
+  const renderScams = () => (
     <div className="space-y-6 max-w-4xl mx-auto">
       <div className="flex items-center justify-between pb-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <FileCode className="w-6 h-6 text-indigo-600" />
-          <h2 className="text-xl font-bold text-slate-800">AI Promptlari va Turlari</h2>
+          <AlertTriangle className="w-6 h-6 text-red-600" />
+          <h2 className="text-xl font-bold text-slate-800">Firibgarlik Sxemalari (Scams)</h2>
         </div>
-        {!editingRule && !isCreatingRule && (
+        {!editingScam && !isCreatingScam && (
           <button 
             onClick={() => {
-              setEditingRule({
-                doc_type: '', label: '', description: '', icon_name: 'FileText', color_gradient: 'from-slate-500 to-slate-700', rules_text: ''
+              setEditingScam({
+                title: '', description: '', real_example: '', match_criteria: '', severity: 'high'
               });
-              setIsCreatingRule(true);
+              setIsCreatingScam(true);
             }} 
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl flex items-center gap-2 text-sm"
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl flex items-center gap-2 text-sm"
           >
-            <Plus className="w-4 h-4" /> Yangi Tur
+            <Plus className="w-4 h-4" /> Yangi Firibgarlik
           </button>
         )}
       </div>
 
-      {editingRule ? (
-        <div className="bg-white p-6 rounded-2xl border border-indigo-200 shadow-sm space-y-4">
-          <h3 className="font-bold text-lg text-slate-800">{isCreatingRule ? "Yangi Hujjat Turini Yaratish" : `Tahrirlash: ${editingRule.label || editingRule.doc_type}`}</h3>
+      {editingScam ? (
+        <div className="bg-white p-6 rounded-2xl border border-red-200 shadow-sm space-y-4">
+          <h3 className="font-bold text-lg text-slate-800">{isCreatingScam ? "Yangi Firibgarlik Qo'shish" : `Tahrirlash: ${editingScam.title}`}</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
+          <div className="grid grid-cols-1 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">ID (Faqat inglizcha harflar)</label>
-              <input type="text" value={editingRule.doc_type} disabled={!isCreatingRule} onChange={e => setEditingRule({...editingRule, doc_type: e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '')})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm disabled:opacity-50" placeholder="masalan: new_law" />
+              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Nomi (Title)</label>
+              <input type="text" value={editingScam.title || ''} onChange={e => setEditingScam({...editingScam, title: e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" placeholder="Masalan: Novostroyka muddatsiz qurilish" />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Nomi (Label)</label>
-              <input type="text" value={editingRule.label || ''} onChange={e => setEditingRule({...editingRule, label: e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" placeholder="Yangi Qonun" />
-            </div>
-            <div className="md:col-span-2">
               <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Qisqacha Ta'rif (Description)</label>
-              <input type="text" value={editingRule.description || ''} onChange={e => setEditingRule({...editingRule, description: e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" placeholder="Hujjat haqida ma'lumot..." />
+              <input type="text" value={editingScam.description || ''} onChange={e => setEditingScam({...editingScam, description: e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" placeholder="Bu firibgarlik qanday ishlaydi..." />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Ikonka (IconName)</label>
-              <select value={editingRule.icon_name || 'FileText'} onChange={e => setEditingRule({...editingRule, icon_name: e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
-                <option value="FileText">FileText (Hujjat)</option>
-                <option value="Scale">Scale (Tarozi)</option>
-                <option value="Building2">Building2 (Bino)</option>
-                <option value="User">User (Odam)</option>
-                <option value="Home">Home (Uy)</option>
-                <option value="Monitor">Monitor (Texnika)</option>
-                <option value="ShoppingCart">ShoppingCart (Savdo)</option>
-                <option value="Book">Book (Kitob)</option>
-                <option value="Shield">Shield (Qalqon)</option>
-                <option value="Briefcase">Briefcase (Portfel)</option>
-              </select>
+              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Hayotiy Misol (Real Example)</label>
+              <input type="text" value={editingScam.real_example || ''} onChange={e => setEditingScam({...editingScam, real_example: e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" placeholder="Masalan: 2023-yilda X kompaniya 450 kishini aldagan..." />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Rang (Gradient)</label>
-              <select value={editingRule.color_gradient || 'from-slate-500 to-slate-700'} onChange={e => setEditingRule({...editingRule, color_gradient: e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
-                <option value="from-slate-500 to-slate-700">Kulrang (Slate)</option>
-                <option value="from-blue-500 to-indigo-500">Ko'k-Binafsha (Blue-Indigo)</option>
-                <option value="from-emerald-400 to-emerald-600">Yashil (Emerald)</option>
-                <option value="from-orange-400 to-orange-600">Apelsin (Orange)</option>
-                <option value="from-purple-500 to-purple-700">Binafsha (Purple)</option>
-                <option value="from-cyan-500 to-cyan-700">Moviy (Cyan)</option>
-                <option value="from-red-500 to-red-700">Qizil (Red)</option>
-                <option value="from-yellow-500 to-amber-600">Sariq (Yellow-Amber)</option>
+              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">AI Aniqlash Shartlari (Match Criteria)</label>
+              <textarea
+                value={editingScam.match_criteria || ''}
+                onChange={(e) => setEditingScam({ ...editingScam, match_criteria: e.target.value })}
+                rows={4}
+                className="w-full p-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-red-500 text-sm resize-y"
+                placeholder="Agar shartnomada shunday so'zlar bo'lsa: ..."
+              ></textarea>
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Xavflilik Darajasi (Severity)</label>
+              <select value={editingScam.severity || 'high'} onChange={e => setEditingScam({...editingScam, severity: e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                <option value="high">O'ta xavfli (High)</option>
+                <option value="medium">O'rtacha (Medium)</option>
               </select>
             </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase mb-1">AI uchun Qoidalar (System Prompt)</label>
-            <p className="text-xs text-slate-500 font-medium mb-2">Bu yerda yozilgan qoidalar AI ga yuboriladigan tizim xabariga qo'shiladi.</p>
-            <textarea
-              value={editingRule.rules_text}
-              onChange={(e) => setEditingRule({ ...editingRule, rules_text: e.target.value })}
-              rows={8}
-              className="w-full p-4 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 font-mono text-sm resize-y"
-              placeholder="1. ...&#10;2. ..."
-            ></textarea>
           </div>
           
           <div className="flex gap-3 pt-2">
-            <button onClick={() => { setEditingRule(null); setIsCreatingRule(false); }} className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-colors">
+            <button onClick={() => { setEditingScam(null); setIsCreatingScam(false); }} className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-colors">
               Bekor qilish
             </button>
-            <button onClick={handleSaveRule} disabled={loading || !editingRule.doc_type} className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2 disabled:opacity-50">
+            <button onClick={handleSaveScam} disabled={loading || !editingScam.title} className="flex-1 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2 disabled:opacity-50">
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><CheckCircle className="w-4 h-4" /> Saqlash</>}
             </button>
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {rules.map(rule => (
-            <div key={rule.doc_type} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col relative overflow-hidden group">
-              <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${rule.color_gradient || 'from-slate-100 to-slate-200'} opacity-10 rounded-bl-full`}></div>
-              <div className="flex justify-between items-center mb-2 relative z-10">
-                <span className="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-md border border-slate-200">{rule.label || rule.doc_type}</span>
-                <span className="text-[10px] text-slate-400 uppercase font-bold">{rule.doc_type}</span>
+        <div className="grid grid-cols-1 gap-4">
+          {scams.map(scam => (
+            <div key={scam.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col relative overflow-hidden group">
+              <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 opacity-20 rounded-bl-full`}></div>
+              <div className="flex justify-between items-start mb-2 relative z-10">
+                <h4 className="font-bold text-slate-800">{scam.title}</h4>
+                <span className={`px-2 py-1 text-[10px] font-bold rounded-md ${scam.severity === 'high' ? 'bg-red-100 text-red-700' : 'bg-orange-100 text-orange-700'}`}>
+                  {scam.severity}
+                </span>
               </div>
-              <p className="text-xs text-slate-500 mb-3">{rule.description}</p>
-              <p className="text-sm text-slate-600 line-clamp-2 mb-4 flex-1 font-medium">{rule.rules_text}</p>
+              <p className="text-xs text-slate-500 mb-2">{scam.description}</p>
+              <div className="bg-slate-50 p-3 rounded-lg mb-4 text-xs italic text-slate-600 border border-slate-100">
+                <strong>Hayotiy misol:</strong> {scam.real_example}
+              </div>
               <div className="flex gap-2 mt-auto">
                 <button 
-                  onClick={() => setEditingRule(rule)} 
-                  className="flex-1 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-xl text-sm transition-colors border border-indigo-100"
+                  onClick={() => setEditingScam(scam)} 
+                  className="flex-1 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm transition-colors border border-slate-200"
                 >
                   Tahrirlash
                 </button>
                 <button 
-                  onClick={() => handleDeleteRule(rule.doc_type)} 
+                  onClick={() => handleDeleteScam(scam.id)} 
                   className="p-2 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-xl transition-colors border border-red-100 flex items-center justify-center"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -503,7 +488,7 @@ export default function AdminScreen() {
             { id: 'promocodes', icon: Gift, label: 'Promokodlar' },
             { id: 'alerts', icon: Bell, label: 'Xabarnomalar' },
             { id: 'email', icon: Mail, label: 'Email Jo`natish' },
-            { id: 'rules', icon: FileCode, label: 'AI Qoidalari' },
+            { id: 'scams', icon: AlertTriangle, label: 'Firibgarlik (Scam)' },
           ].map(tab => (
             <button 
               key={tab.id}
@@ -522,7 +507,7 @@ export default function AdminScreen() {
           {activeTab === 'promocodes' && renderPromos()}
           {activeTab === 'alerts' && renderAlerts()}
           {activeTab === 'email' && renderEmail()}
-          {activeTab === 'rules' && renderRules()}
+          {activeTab === 'scams' && renderScams()}
         </div>
       </div>
 
@@ -539,15 +524,15 @@ export default function AdminScreen() {
       />
 
       <CustomDialog 
-        isOpen={deleteRuleDialog.isOpen}
+        isOpen={deleteScamDialog.isOpen}
         type="confirm"
         theme="red"
-        title="Hujjat Turini O'chirish"
-        description="Rostdan ham ushbu hujjat turini (kategoriyasini) o'chirib tashlamoqchimisiz? Buni ortga qaytarib bo'lmaydi."
+        title="Firibgarlik Sxemasini O'chirish"
+        description="Rostdan ham ushbu firibgarlik sxemasini o'chirib tashlamoqchimisiz? Buni ortga qaytarib bo'lmaydi."
         confirmText="O'chirish"
         isLoading={loading}
-        onClose={() => setDeleteRuleDialog({ isOpen: false, doc_type: null })}
-        onConfirm={handleConfirmDeleteRule}
+        onClose={() => setDeleteScamDialog({ isOpen: false, scam_id: null })}
+        onConfirm={handleConfirmDeleteScam}
       />
 
       <CustomDialog 

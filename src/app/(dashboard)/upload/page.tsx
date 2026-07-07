@@ -17,9 +17,18 @@ export default function UploadPage() {
   const [error, setError] = useState<string | null>(null);
   const [showBotRedirect, setShowBotRedirect] = useState(false);
 
+  // Dynamic Questionnaire State
+  const [questions, setQuestions] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<Record<number, string>>({});
+  const [isQuestionPhase, setIsQuestionPhase] = useState(false);
+  const [loadingMsg, setLoadingMsg] = useState("Tahlil qilinmoqda...");
+
   const handleFile = (file: File) => {
     setError(null);
     setShowBotRedirect(false);
+    setQuestions([]);
+    setAnswers({});
+    setIsQuestionPhase(false);
     
     const err = validateFile(file);
     if (err === "TG_BOT_REDIRECT") {
@@ -53,9 +62,42 @@ export default function UploadPage() {
       return;
     }
 
+    if (!isQuestionPhase) {
+      // Step 1: Fast extract questions
+      setIsProcessing(true);
+      setLoadingMsg("Hujjat ko'zdan kechirilmoqda...");
+      setError(null);
+      
+      try {
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+        const res = await fetch("/api/extract-questions", { method: "POST", body: formData });
+        const data = await res.json();
+        
+        if (data.questions && data.questions.length > 0) {
+          setQuestions(data.questions);
+          setIsQuestionPhase(true);
+          setIsProcessing(false);
+          return; // Pause here to let user answer
+        } else {
+          // No questions needed, proceed to deep scan
+          await performFinalScan();
+        }
+      } catch (err) {
+        // Fallback to normal scan
+        await performFinalScan();
+      }
+    } else {
+      // Step 2: Final Scan with answers
+      await performFinalScan(answers);
+    }
+  };
+
+  const performFinalScan = async (contextAnswers?: Record<number, string>) => {
     setIsProcessing(true);
     setProgress(0);
     setError(null);
+    setLoadingMsg("Huquqiy tahlil amalga oshirilmoqda...");
 
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
@@ -66,7 +108,7 @@ export default function UploadPage() {
 
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      const result = await scanDocument(selectedFile, 'rag_auto', session?.user?.id);
+      const result = await scanDocument(selectedFile!, 'rag_auto', session?.user?.id, contextAnswers);
       
       setProgress(100);
       clearInterval(progressInterval);
@@ -75,9 +117,6 @@ export default function UploadPage() {
         if (result.session_id && result.session_id !== "temp-session") {
           router.push(`/results/${result.session_id}`);
         } else {
-          // If the backend doesn't return a valid UUID for some reason (e.g. failure to save)
-          // we could pass state via history, but it's better to ensure DB saves it.
-          // For now, if no ID is returned, we handle gracefully.
           setError("Tahlil qilindi, ammo bazaga saqlanmadi.");
           setIsProcessing(false);
         }
@@ -200,10 +239,39 @@ export default function UploadPage() {
             {isProcessing ? (
               <div className="w-full bg-blue-50 py-4 md:py-5 rounded-2xl flex flex-col items-center justify-center border border-blue-100 shadow-inner">
                  <Loader2 className="w-8 h-8 text-blue-600 animate-spin mb-3" />
-                 <span className="text-sm font-bold text-blue-800 mb-2">Tahlil qilinmoqda... {Math.round(progress)}%</span>
-                 <div className="w-64 h-2 bg-blue-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-blue-600 rounded-full transition-all" style={{ width: `${progress}%` }}></div>
-                 </div>
+                 <span className="text-sm font-bold text-blue-800 mb-2">{loadingMsg} {progress > 0 ? `${Math.round(progress)}%` : ''}</span>
+                 {progress > 0 && (
+                   <div className="w-64 h-2 bg-blue-100 rounded-full overflow-hidden">
+                      <div className="h-full bg-blue-600 rounded-full transition-all" style={{ width: `${progress}%` }}></div>
+                   </div>
+                 )}
+              </div>
+            ) : isQuestionPhase ? (
+              <div className="w-full bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm mb-4 animate-in fade-in slide-in-from-bottom-4">
+                <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-blue-600" />
+                  AI quyidagilarni aniqlashtirmoqchi:
+                </h3>
+                <div className="space-y-4">
+                  {questions.map((q, idx) => (
+                    <div key={idx} className="flex flex-col gap-2">
+                      <label className="text-sm font-medium text-slate-700">{q}</label>
+                      <input 
+                        type="text" 
+                        className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm"
+                        placeholder="Javobingizni kiriting..."
+                        value={answers[idx] || ""}
+                        onChange={(e) => setAnswers(prev => ({ ...prev, [idx]: e.target.value }))}
+                      />
+                    </div>
+                  ))}
+                </div>
+                <button 
+                  onClick={startAnalysis}
+                  className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold text-lg transition-all shadow-md active:scale-[0.98]"
+                >
+                  Tahlilni davom ettirish
+                </button>
               </div>
             ) : (
               <button 

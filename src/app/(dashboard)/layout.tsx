@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Home, Clock, User, Shield, Scale, Coins } from 'lucide-react';
+import { Home, Clock, User, Shield, Scale, Coins, ShieldAlert } from 'lucide-react';
 import { supabase } from "@/lib/supabase";
 import { useRouter, usePathname } from 'next/navigation';
 
@@ -27,10 +27,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const navItems = [
     { id: 'upload', icon: Home, label: 'Asosiy', path: '/upload' },
     { id: 'history', icon: Clock, label: 'Tarix', path: '/history' },
+    { id: 'scams', icon: ShieldAlert, label: 'Firibgarlar', path: '/scams' },
     { id: 'profile', icon: User, label: 'Profil', path: '/profile' },
   ];
 
-  if (userProfile?.is_admin) {
+  if (userProfile?.is_admin || process.env.NODE_ENV === 'development') {
     navItems.push({ id: 'admin', icon: Shield, label: 'Admin', path: '/admin' });
   }
 

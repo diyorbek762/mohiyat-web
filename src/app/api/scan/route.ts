@@ -117,6 +117,8 @@ export async function POST(req: NextRequest) {
       documentText = buffer.toString("utf8");
     }
 
+    const contextAnswers = formData.get("context_answers") as string | null;
+
     let specificRules = "Umumiy yuridik qoidalarga asosan tekshiring.";
     
     // 2. Vector RAG: Fayl matnidan eng mos qonun moddalarini qidirish
@@ -163,10 +165,28 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // 4. FIRIBGARLIKLAR (SCAMS) BAZASINI OLISH
+    let scamsContext = "";
+    const { data: activeScams, error: scamsError } = await supabase
+      .from('scam_patterns')
+      .select('title, match_criteria, real_example')
+      .eq('is_active', true);
+      
+    if (!scamsError && activeScams && activeScams.length > 0) {
+      scamsContext = "\n\nO'ZBEKISTONDA KENG TARQALGAN FIRIBGARLIKLAR (SCAMS) BAZASI:\n" +
+        "Agar hujjat ushbu sxemalardan biriga mos kelsa, albatta 'is_scam': true qilib, 'scam_details' ga mos 'Hayotiy Misol'ni yozing:\n";
+      activeScams.forEach((scam: any) => {
+        scamsContext += `\n- FIRIBGARLIK NOMI: ${scam.title}\n  ANIQLASH SHARTLARI: ${scam.match_criteria}\n  HAYOTIY MISOL: ${scam.real_example}\n`;
+      });
+    }
+
     const dynamicInstruction = `${SYSTEM_INSTRUCTION}
 
 QO'SHIMCHA MAXSUS QOIDALAR (FAQAT SHU QOIDALARGA ASOSLANIB TAHLIL QILING! BOSHQA QONUNLARNI O'YLAB TOPMANG!):
-${specificRules}`;
+${specificRules}${scamsContext}
+
+FOYDALANUVCHI HOLATI (KONTEKST JAVOBLARI):
+${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
 
     // Using Gemini 2.0 Flash for better availability
     const model = genAI.getGenerativeModel({
@@ -221,9 +241,10 @@ ${specificRules}`;
         
         // Vision models for images, or all models for text/PDF
         const orModels = isImage ? [
-          "nvidia/nemotron-nano-12b-v2-vl:free",
+          "google/gemini-2.0-flash-lite-preview-02-05:free",
           "openrouter/free"
         ] : [
+          "google/gemini-2.0-flash-lite-preview-02-05:free",
           "openrouter/free"
         ];
         
@@ -236,7 +257,8 @@ ${specificRules}`;
              const orResult = await openrouter.chat.completions.create({
                model: orModel,
                messages: openRouterMessages,
-               max_tokens: 4000
+               max_tokens: 4000,
+               response_format: { type: "json_object" }
              });
              responseText = orResult.choices[0].message.content || "";
              success = true;
@@ -331,6 +353,8 @@ ${specificRules}`;
       blind_spots: analysis.blind_spots || [],
       risk_score: analysis.risk_score || 50,
       summary: analysis.overall_summary || "",
+      is_scam: analysis.is_scam || false,
+      scam_details: analysis.scam_details || "",
       page_count: 1,
       processing_ms: processingMs,
       model_used: finalModelUsed,

@@ -63,6 +63,8 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
               risk_score: data.risk_score || 0,
               blind_spots: data.full_report?.blind_spots || [],
               summary: data.full_report?.overall_summary || data.short_title || "Tahlil natijasi",
+              is_scam: data.full_report?.is_scam || false,
+              scam_details: data.full_report?.scam_details || "",
             });
             // Look for existing draft
             if (data.counter_offer_draft && data.counter_offer_draft.length > 0) {
@@ -166,7 +168,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
   if (loading) return <div className="flex justify-center items-center h-full"><Loader2 className="w-10 h-10 animate-spin text-blue-600" /></div>;
   if (!scanResult) return <div className="flex justify-center items-center h-full text-slate-500">Natija topilmadi yoki sizga tegishli emas.</div>;
 
-  const { risk_score, blind_spots, summary } = scanResult;
+  const { risk_score, blind_spots, summary, is_scam, scam_details } = scanResult;
   const isHighRisk = risk_score >= 70;
   const isMediumRisk = risk_score >= 40 && risk_score < 70;
   
@@ -250,6 +252,33 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
               <span>Tasdiqlash Sertifikati</span>
             </button>
           </div>
+
+          {is_scam && (
+            <div className="mb-6 w-full bg-red-600 rounded-3xl p-6 md:p-8 shadow-[0_8px_30px_rgb(220,38,38,0.3)] relative overflow-hidden animate-in fade-in zoom-in-95 duration-500">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-red-500 rounded-full blur-3xl opacity-50 -mr-20 -mt-20 pointer-events-none"></div>
+              <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-5">
+                <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center shrink-0 shadow-inner backdrop-blur-sm border border-white/30">
+                  <AlertTriangle className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-white mb-2 flex items-center gap-2 tracking-tight">
+                    DIQQAT! XAVFLI FIRIBGARLIK ANIQLANDI
+                  </h3>
+                  <p className="text-red-100 font-medium leading-relaxed">
+                    Sizning shartnomangizda O'zbekistonda keng tarqalgan va juda ko'p odamlarga zarar keltirgan firibgarlik sxemasi alomatlari mavjud!
+                  </p>
+                </div>
+              </div>
+              <div className="relative z-10 mt-6 bg-black/20 p-5 rounded-2xl border border-white/10">
+                <h4 className="text-white font-bold mb-2 flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-red-300" /> Hayotiy Misol (Real voqea):
+                </h4>
+                <p className="text-red-50 text-sm font-medium leading-relaxed italic">
+                  "{scam_details || "Ushbu bandlar orqali odamlar juda katta moliyaviy zarar ko'rishgan."}"
+                </p>
+              </div>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 items-start">
             {blind_spots && blind_spots.length > 0 ? (

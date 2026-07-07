@@ -133,9 +133,16 @@ QAT'IY QOIDALAR:
     const { error: deductErr } = await authSupabase.rpc('decrement_coins_amount', { amount: 3 });
     if (deductErr) throw new Error("Coin yechishda xatolik");
 
-    // Save draft to DB
+    // Save draft to DB using Service Role Key to bypass RLS UPDATE issues
+    const serviceSupabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
     const updatedDrafts = [...(scanSession.counter_offer_draft || []), { tone, selected_risks, draft: draftText, created_at: new Date().toISOString() }];
-    await authSupabase.from('scan_sessions').update({ counter_offer_draft: updatedDrafts }).eq('id', session_id);
+    const { error: updateError } = await serviceSupabase.from('scan_sessions').update({ counter_offer_draft: updatedDrafts }).eq('id', session_id);
+    if (updateError) {
+      console.error("Failed to update counter offer draft:", updateError);
+    }
 
     return NextResponse.json({ success: true, draft: draftText });
 

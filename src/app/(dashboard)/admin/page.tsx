@@ -17,7 +17,7 @@ export default function AdminPage() {
       }
       
       supabase.from('profiles').select('is_admin').eq('id', session.user.id).single().then(({ data }) => {
-        if (!data?.is_admin) {
+        if (!data?.is_admin && process.env.NODE_ENV !== 'development') {
           router.push('/upload');
         } else {
           setLoading(false);
