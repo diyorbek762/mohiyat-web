@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, use, useRef } from 'react';
-import { ArrowRight, ThumbsUp, ThumbsDown, Sparkles, FileText, AlertTriangle, Coins, Shield, ListTodo, Award, Lock, Loader2, QrCode, PenTool, Clock, CheckCircle2, MessageSquare, Send, Check } from 'lucide-react';
+import { ArrowRight, ThumbsUp, ThumbsDown, Sparkles, FileText, AlertTriangle, Coins, Shield, ListTodo, Award, Lock, Loader2, QrCode, PenTool, Clock, CheckCircle2, MessageSquare, Send, Check, Users, Bell, ExternalLink } from 'lucide-react';
 import { supabase } from "@/lib/supabase";
 import { useRouter } from 'next/navigation';
 import posthog from 'posthog-js';
@@ -9,6 +9,8 @@ import { AnalysisCard } from '@/components/results/AnalysisCard';
 import { CertificateModal } from '@/components/results/CertificateModal';
 import { ChatModal } from '@/components/results/ChatModal';
 import { CounterOfferModal } from '@/components/results/CounterOfferModal';
+import { NegotiateModal } from '@/components/results/NegotiateModal';
+import { ActiveNegotiation } from '@/components/results/ActiveNegotiation';
 
 export default function ResultsPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
@@ -35,6 +37,13 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
 
   // QR Certificate State
   const [qrModalOpen, setQrModalOpen] = useState(false);
+
+  // Negotiate Modal State
+  const [negotiateModalOpen, setNegotiateModalOpen] = useState(false);
+
+  // Negotiation room state
+  const [negotiationRoom, setNegotiationRoom] = useState<any>(null);
+  const [confirmingRoom, setConfirmingRoom] = useState(false);
 
   // Toast State
   const [toastMsg, setToastMsg] = useState<string | null>(null);
@@ -80,12 +89,70 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                 if (chatData) setChatMessages(chatData);
                 setLoading(false);
               });
+          // Load negotiation room for this session
+            supabase
+              .from('negotiation_rooms')
+              .select('*')
+              .eq('session_id', resolvedParams.id)
+              .order('created_at', { ascending: false })
+              .limit(1)
+              .then(({ data: roomData }) => {
+                if (roomData && roomData.length > 0) setNegotiationRoom(roomData[0]);
+              });
           } else {
             setLoading(false);
           }
         });
     });
   }, [resolvedParams.id, router]);
+
+  const handleConfirmRoom = async (approved: boolean) => {
+    if (!negotiationRoom) return;
+    setConfirmingRoom(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await fetch('/api/negotiate/confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session?.access_token}` },
+        body: JSON.stringify({ room_id: negotiationRoom.id, approved }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setNegotiationRoom((prev: any) => ({ ...prev, status: data.status }));
+      if (approved) showToast('AI kompromiss tayyorlanmoqda...');
+      else showToast('Rad etildi. Yangi havola yaratildi.');
+    } catch (err: any) {
+      showToast('Xatolik: ' + err.message);
+    } finally {
+      setConfirmingRoom(false);
+    }
+  };
+
+  const handleCounterReply = async (replies: Record<number, string>) => {
+    if (!negotiationRoom) return;
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await fetch('/api/negotiate/counter-reply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session?.access_token}`
+        },
+        body: JSON.stringify({
+          session_id: resolvedParams.id,
+          replies
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      
+      showToast('Yangi takliflar mehmonga yuborildi!');
+      const { data: updatedRoom } = await supabase.from('negotiation_rooms').select('*').eq('id', negotiationRoom.id).single();
+      if (updatedRoom) setNegotiationRoom(updatedRoom);
+    } catch (err: any) {
+      showToast(err.message || 'Xatolik yuz berdi');
+    }
+  };
 
   const handleGenerateCounterOffer = async () => {
     if (coSelectedRisks.length === 0) {
@@ -181,7 +248,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
     <div className="flex-1 flex flex-col bg-slate-50 relative w-full h-full overflow-y-auto">
       <div className="bg-white/80 backdrop-blur-xl pt-6 pb-4 px-5 md:px-10 border-b border-slate-200 flex items-center justify-between shrink-0 z-20 shadow-sm sticky top-0">
         <div className="max-w-5xl mx-auto w-full flex items-center justify-between">
-          <button onClick={() => router.push('/upload')} className="flex items-center gap-2 text-slate-500 hover:text-slate-800 bg-slate-100/50 hover:bg-slate-100 px-3 py-1.5 md:px-4 md:py-2 rounded-full transition-colors font-medium text-sm">
+          <button onClick={() => router.push('/history')} className="flex items-center gap-2 text-slate-500 hover:text-slate-800 bg-slate-100/50 hover:bg-slate-100 px-3 py-1.5 md:px-4 md:py-2 rounded-full transition-colors font-medium text-sm">
             <ArrowRight className="w-5 h-5 rotate-180" />
             <span className="hidden md:block">Yopish</span>
           </button>
@@ -192,6 +259,68 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
 
       <div className="flex-1 p-5 md:p-8 pb-8">
         <div className="max-w-5xl mx-auto space-y-5 md:space-y-6">
+          {/* Negotiation Room Status Banner */}
+          {negotiationRoom && (
+            <div className={`rounded-2xl border p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 animate-in fade-in duration-300 ${
+              negotiationRoom.status === 'awaiting_confirmation'
+                ? 'bg-amber-50 border-amber-200'
+                : negotiationRoom.status === 'completed'
+                ? 'bg-emerald-50 border-emerald-200'
+                : negotiationRoom.status === 'ai_drafting'
+                ? 'bg-blue-50 border-blue-200'
+                : 'bg-slate-50 border-slate-200'
+            }`}>
+              <Bell className={`w-5 h-5 shrink-0 ${
+                negotiationRoom.status === 'awaiting_confirmation' ? 'text-amber-600' :
+                negotiationRoom.status === 'completed' ? 'text-emerald-600' :
+                negotiationRoom.status === 'ai_drafting' ? 'text-blue-600' : 'text-slate-500'
+              }`} />
+              <div className="flex-1">
+                {negotiationRoom.status === 'pending' && <p className="text-sm font-bold text-slate-700">Havola yuborildi — javob kutilmoqda...</p>}
+                {negotiationRoom.status === 'awaiting_confirmation' && (
+                  <>
+                    <p className="text-sm font-bold text-amber-900">⚠️ {negotiationRoom.guest_name || 'Mehmon'} javob yubordi! Tasdiqlaysizmi?</p>
+                    <p className="text-xs text-amber-700 mt-0.5">Tasdiqlasangiz AI kompromiss yaratadi (10 Coin)</p>
+                  </>
+                )}
+                {negotiationRoom.status === 'ai_drafting' && <p className="text-sm font-bold text-blue-800">🤖 AI adolatli kompromiss tayyorlamoqda...</p>}
+                {negotiationRoom.status === 'completed' && (
+                  <p className="text-sm font-bold text-emerald-800">✅ Kompromiss tayyor!</p>
+                )}
+              </div>
+              {negotiationRoom.status === 'awaiting_confirmation' && (
+                <div className="flex gap-2 shrink-0">
+                  <button onClick={() => handleConfirmRoom(false)} disabled={confirmingRoom}
+                          className="px-3 py-1.5 rounded-xl text-xs font-bold bg-white border border-red-200 text-red-600 hover:bg-red-50 transition disabled:opacity-50">
+                    Rad etish
+                  </button>
+                  <button onClick={() => handleConfirmRoom(true)} disabled={confirmingRoom}
+                          className="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-600 text-white hover:bg-amber-700 transition disabled:opacity-50 flex items-center gap-1">
+                    {confirmingRoom ? <Loader2 className="w-3 h-3 animate-spin" /> : null}
+                    Ha, tasdiqlash
+                  </button>
+                </div>
+              )}
+              {negotiationRoom.status === 'completed' && negotiationRoom.guest_token && (
+                <a href={`/negotiate/${negotiationRoom.guest_token}/result`} target="_blank"
+                   className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-700 transition shrink-0">
+                  Ko'rish <ExternalLink className="w-3 h-3" />
+                </a>
+              )}
+            </div>
+          )}
+
+          {/* Active Negotiation Details */}
+          {negotiationRoom && negotiationRoom.status === 'awaiting_confirmation' && (
+            <ActiveNegotiation 
+              room={negotiationRoom} 
+              onConfirm={() => handleConfirmRoom(true)} 
+              onReject={() => handleConfirmRoom(false)} 
+              onCounterReply={handleCounterReply}
+              confirmingRoom={confirmingRoom} 
+            />
+          )}
+
           <div className={`bg-white rounded-3xl border p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 md:gap-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden ${riskBgClass}`}>
             <div className={`absolute top-0 right-0 w-32 h-32 md:w-64 md:h-64 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none ${isHighRisk ? 'bg-red-100' : isMediumRisk ? 'bg-orange-100' : 'bg-emerald-100'}`}></div>
             
@@ -231,25 +360,32 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
           {/* Unified Actions Toolbar: Counter-Offer, Chat & QR Certificate */}
           <div className="flex flex-col sm:flex-row gap-4 mb-2">
             <button 
+              onClick={() => setNegotiateModalOpen(true)}
+              className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-colors shadow-md group"
+            >
+              <Users className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              <span>Muzokara Boshlash</span>
+            </button>
+            <button 
               onClick={() => coDraft ? window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }) : setCoModalOpen(true)}
               className="flex-1 bg-slate-900 hover:bg-slate-800 text-white p-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-colors shadow-md group"
             >
               <PenTool className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span>{coDraft ? "Tayyor xatni ko'rish" : "Qarshi Taklif Yozish (3 Coin)"}</span>
+              <span>{coDraft ? "Tayyor xatni ko'rish" : "Qarshi Taklif (3 Coin)"}</span>
             </button>
             <button 
               onClick={() => setChatModalOpen(true)}
               className="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 p-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-colors shadow-sm group"
             >
               <MessageSquare className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span>Hujjat bilan suhbat (Chat)</span>
+              <span>Hujjat bilan Chat</span>
             </button>
             <button 
               onClick={() => setQrModalOpen(true)}
               className="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 p-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-colors shadow-sm"
             >
               <QrCode className="w-5 h-5 text-slate-600" />
-              <span>Tasdiqlash Sertifikati</span>
+              <span>Sertifikat</span>
             </button>
           </div>
 
@@ -380,6 +516,14 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
         coError={coError}
         coGenerating={coGenerating}
         handleGenerateCounterOffer={handleGenerateCounterOffer}
+      />
+
+      {/* Negotiate Modal */}
+      <NegotiateModal
+        isOpen={negotiateModalOpen}
+        setIsOpen={setNegotiateModalOpen}
+        sessionId={resolvedParams.id}
+        blindSpots={blind_spots}
       />
 
       {/* Chat Modal */}

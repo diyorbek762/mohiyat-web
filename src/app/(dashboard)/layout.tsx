@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Home, Clock, User, Shield, Scale, Coins, ShieldAlert } from 'lucide-react';
 import { supabase } from "@/lib/supabase";
 import { useRouter, usePathname } from 'next/navigation';
+import NotificationBell from '@/components/NotificationBell';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -89,6 +90,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </nav>
         
         <main className="flex-1 flex flex-col overflow-hidden relative pb-20 md:pb-0 h-full">
+          <div className="absolute top-4 right-4 z-50">
+            <NotificationBell />
+          </div>
           {children}
         </main>
       </div>

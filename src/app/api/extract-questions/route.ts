@@ -66,20 +66,21 @@ export async function POST(req: NextRequest) {
     const truncatedText = documentText.substring(0, 50000); // 50k chars is enough for context extraction
 
     const systemPrompt = `Siz huquqiy tahlilchi AIsiz. Foydalanuvchi hujjat yukladi.
-Vazifangiz: Shu hujjatni tahlil qilish uchun foydalanuvchidan qanday muhim kontekst (ma'lumot) kerakligini aniqlash va 1 ta yoki 2 ta qisqa savol tuzish.
-
-Masalan:
-- Agar uy-joy shartnomasi bo'lsa: "Siz uyni olyapsizmi yoki sotyapsizmi?"
-- Agar kredit bo'lsa: "Oylik rasmiy daromadingiz taxminan qancha?" yoki "Boshqa kreditlaringiz bormi?"
-- Agar shartnoma oddiy bo'lsa va qo'shimcha ma'lumot shart bo'lmasa, bo'sh ro'yxat qaytaring.
+Vazifangiz: 
+1. Hujjat turini (domain) aniqlash. Agar hujjat qarz, kredit, lizing, yoki bo'lib to'lashga oid bo'lsa "kredit_yoki_qarz" deb belgilang.
+2. Agar hujjat "kredit_yoki_qarz" bo'lsa, "questions" arrayini quyidagi 3 ta savol bilan to'ldiring:
+   - "Oyiga qat'iy daromadingiz qancha (naqd va plastikni qo'shib)?"
+   - "Har oylik yashash xarajatlaringiz qancha (ijara, ro'zg'or)?"
+   - "Hozir to'layotgan boshqa qarz yoki kreditingiz bormi?"
+3. Agar hujjat boshqa turdagi (ijara, mehnat, oldi-sotdi) bo'lsa, uni tushunish uchun kerak bo'ladigan o'zingizning 1-2 ta qisqa savolingizni bering. Yoki hech qanday savol kerak bo'lmasa bo'sh ro'yxat qaytaring.
 
 QOIDALAR:
-1. FAQAT JSON formatida javob bering, boshqa hech qanday so'z yozmang.
-2. Savollar o'zbek tilida, qisqa va aniq bo'lishi kerak.
-3. Maksimal 2 ta savol.
+1. FAQAT JSON formatida javob bering, boshqa hech narsa yozmang.
+2. Savollar o'zbek tilida bo'lishi kerak.
 
 Kutilayotgan JSON format:
 {
+  "domain": "kredit_yoki_qarz|boshqa",
   "questions": [
     "Savol 1?",
     "Savol 2?"
@@ -94,13 +95,20 @@ ${truncatedText}`;
     try {
       const response = await openrouter.chat.completions.create({
         model: "openrouter/free",
-        response_format: { type: "json_object" },
         messages: [
           { role: "system", content: systemPrompt }
         ],
       });
       
-      const content = response.choices[0].message.content || "{}";
+      let content = response.choices[0].message.content || "{}";
+      
+      // Extract JSON using regex in case model wraps it in markdown
+      const startIndex = content.indexOf('{');
+      const endIndex = content.lastIndexOf('}');
+      if (startIndex !== -1 && endIndex !== -1 && endIndex >= startIndex) {
+        content = content.substring(startIndex, endIndex + 1);
+      }
+      
       jsonResponse = JSON.parse(content);
     } catch (e: any) {
       console.warn("Fast Extract Questions Failed:", e.message);

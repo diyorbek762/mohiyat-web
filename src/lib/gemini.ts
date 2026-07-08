@@ -47,6 +47,15 @@ VAZIFANG:
 5. FIRIBGARLIK (SCAM) ANIQLASH: Agar shartnoma O'zbekistonda mashhur bo'lgan xavfli firibgarlik sxemasiga mos kelsa, "is_scam" maydonini true qiling va "scam_details" da aynan nima uchun firibgarlik ekanligini qisqa tushuntirib bering. 
 MUHIM: "scam_details" ichida ikki tirnoq (") ishlatmang yoki ularni doim qochiring (\"). Matn ichida hech qanday Enter (newline) ishlatmang. Qisqa va lo'nda yozing (max 2-3 gap).
 
+6. MOLIYAVIY RENTGEN (FINANCIAL RISK): Agar foydalanuvchi "FOYDALANUVCHI HOLATI" qismida o'zining daromadi va xarajatlari haqida yozgan bo'lsa (Kredit hujjatlarida):
+Shartnomadan OYlik to'lov summasini qidiring. Foydalanuvchining sof qoladigan pulini (Daromad - Xarajat) hisoblang. Agar OYlik to'lov sof puldan katta bo'lsa yoki daromadning 50% idan oshsa, "blind_spots" ro'yxatiga "🛑 MOLIYAVIY XAVF: Qarz botqog'i" nomli qizil (red) xavfni qo'shing va u yerda matematik hisob-kitobni yozib, foydalanuvchini ogohlantiring.
+
+7. CRM MA'LUMOTLARI (B2B CRM UCHUN): Siz shartnomadan asosiy rekvizitlarni ajratib olishingiz shart. 
+- "crm_counterparty": Shartnoma tuzilayotgan qarshi tomonning to'liq yoki qisqa nomi. (Masalan, "MChJ Texnopark"). Agar nom topilmasa, null yozing.
+- "crm_amount": Shartnomadagi asosiy summani SONDAN iborat qilib yozing (faqat raqam). Agar 10 million bo'lsa, 10000000 deb yozing. Agar summa topilmasa, null yozing.
+- "crm_currency": Valyuta turi (UZS, USD, RUB). Agar yo'q bo'lsa, null.
+- "crm_deadline": Shartnomaning amal qilish muddati yoki to'lovning so'nggi sanasi. QAT'IY YYYY-MM-DD formatida yozing (masalan, "2025-12-31"). Agar aniq sana topilmasa, lekin muddat yozilgan bo'lsa (masalan "1 yil"), hozirgi sanadan hisoblab taxminiy YYYY-MM-DD ni bering. Agar umuman muddat bo'lmasa, null.
+
 Javobni FAQAT JSON formatida ber, hech qanday qo'shimcha matnsiz:
 
 {
@@ -54,6 +63,10 @@ Javobni FAQAT JSON formatida ber, hech qanday qo'shimcha matnsiz:
   "detected_domain": "lease|service|employment|other",
   "is_scam": false,
   "scam_details": "Agar is_scam true bo'lsa, bu yerda nima uchunligini yozing. Hech qachon ikki tirnoq ishlatmang. Yo'qsa bo'sh yozuv.",
+  "crm_counterparty": "MChJ Biznes yoki null",
+  "crm_amount": 15000000,
+  "crm_currency": "UZS yoki null",
+  "crm_deadline": "YYYY-MM-DD yoki null",
   "blind_spots": [
     {
       "title": "Band nomi (masalan: Sizning Majburiyatingiz)", 

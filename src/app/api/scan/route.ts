@@ -50,6 +50,7 @@ export async function POST(req: NextRequest) {
     const file = formData.get("file") as File;
     const documentType = formData.get("document_type") as string || "other";
     const userId = formData.get("user_id") as string | null;
+    const orgId = formData.get("org_id") as string | null;
 
     const authHeader = req.headers.get("Authorization");
     const token = authHeader?.replace("Bearer ", "");
@@ -83,17 +84,32 @@ export async function POST(req: NextRequest) {
     }
 
     // Check Coin Balance
-    const { data: profile, error: profileError } = await authSupabase
-      .from("profiles")
-      .select("balance")
-      .eq("id", userId)
-      .single();
+    let currentBalance = 0;
+    
+    if (orgId) {
+      const { data: orgData, error: orgError } = await authSupabase
+        .from("organizations")
+        .select("balance")
+        .eq("id", orgId)
+        .single();
+      if (orgError || !orgData) {
+        return NextResponse.json({ detail: "Tashkilot topilmadi yoki siz a'zosi emassiz" }, { status: 404 });
+      }
+      currentBalance = orgData.balance;
+    } else {
+      const { data: profile, error: profileError } = await authSupabase
+        .from("profiles")
+        .select("balance")
+        .eq("id", userId)
+        .single();
 
-    if (profileError || !profile) {
-      return NextResponse.json({ detail: "Profil topilmadi" }, { status: 404 });
+      if (profileError || !profile) {
+        return NextResponse.json({ detail: "Profil topilmadi" }, { status: 404 });
+      }
+      currentBalance = profile.balance;
     }
 
-    if (!serverSecret && profile.balance < 1) {
+    if (!serverSecret && currentBalance < 1) {
       return NextResponse.json({ detail: "Tanga yetarli emas. Hamyonni to'ldiring." }, { status: 402 });
     }
 
@@ -241,10 +257,9 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
         
         // Vision models for images, or all models for text/PDF
         const orModels = isImage ? [
-          "google/gemini-2.0-flash-lite-preview-02-05:free",
+          "nvidia/nemotron-nano-12b-v2-vl:free",
           "openrouter/free"
         ] : [
-          "google/gemini-2.0-flash-lite-preview-02-05:free",
           "openrouter/free"
         ];
         
@@ -257,8 +272,7 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
              const orResult = await openrouter.chat.completions.create({
                model: orModel,
                messages: openRouterMessages,
-               max_tokens: 4000,
-               response_format: { type: "json_object" }
+               max_tokens: 4000
              });
              responseText = orResult.choices[0].message.content || "";
              success = true;
@@ -314,6 +328,7 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
     // Since we paused payment, we save the full_report directly and unlock it
     const sessionData = {
       user_id: userId,
+      org_id: orgId || null,
       file_name: file.name,
       file_hash: "v2-no-hash-needed", 
       page_count: 1, // Optional: Calculate natively if needed
@@ -322,6 +337,10 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
       blind_spots: analysis.blind_spots || [],
       risk_score: analysis.risk_score || 50,
       full_report: analysis, // <--- FULL REPORT UNLOCKED FOR FREE
+      crm_counterparty: analysis.crm_counterparty || null,
+      crm_amount: typeof analysis.crm_amount === 'number' ? analysis.crm_amount : null,
+      crm_currency: analysis.crm_currency || null,
+      crm_deadline: analysis.crm_deadline || null,
       llm_model_used: finalModelUsed,
       processing_ms: processingMs,
       status: "unlocked", // <--- MARKED AS UNLOCKED
@@ -339,11 +358,12 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
     }
 
     if (!serverSecret) {
-      // Decrement balance securely using atomic RPC for web users
-      const { error: updateError } = await authSupabase.rpc('decrement_coins');
-        
-      if (updateError) {
-        console.error("Failed to deduct coin:", updateError);
+      if (orgId) {
+        const { error: updateError } = await authSupabase.rpc('deduct_org_coins', { p_org_id: orgId, p_amount: 1 });
+        if (updateError) console.error("Failed to deduct org coin:", updateError);
+      } else {
+        const { error: updateError } = await authSupabase.rpc('decrement_coins');
+        if (updateError) console.error("Failed to deduct coin:", updateError);
       }
     }
 
