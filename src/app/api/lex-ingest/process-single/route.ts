@@ -51,44 +51,57 @@ export async function POST(req: NextRequest) {
       chunks.push(rawText.substring(i, i + CHUNK_SIZE));
     }
 
-    // 4. Generate Embeddings & Save
-    // We will process chunks sequentially or in small batches to avoid rate limits
+    // 4. Generate Embeddings & Save in BATCHES
+    // Vercel serverless timeout is 10-60s. Sequential requests will timeout.
+    // Gemini supports batchEmbedContents up to 100 chunks per request.
+    const BATCH_SIZE = 100;
     let inserted = 0;
-    for (const chunk of chunks) {
-      // Create embedding using Gemini or OpenAI (via OpenRouter if supported, but typically embeddings use standard OpenAI or dedicated embedding models)
-      // OpenRouter supports `openai/text-embedding-3-small` or similar, but let's assume we use a standard embedding model
+    
+    for (let i = 0; i < chunks.length; i += BATCH_SIZE) {
+      const batchChunks = chunks.slice(i, i + BATCH_SIZE);
+      
+      const batchRequests = batchChunks.map(chunk => ({
+        model: "models/gemini-embedding-2",
+        content: { parts: [{ text: chunk }] }
+      }));
+
       try {
-        const embeddingRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:embedContent?key=${process.env.GOOGLE_API_KEY}`, {
+        const embeddingRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:batchEmbedContents?key=${process.env.GOOGLE_API_KEY}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            model: "models/gemini-embedding-2",
-            content: { parts: [{ text: chunk }] }
+            requests: batchRequests
           })
         });
 
         if (!embeddingRes.ok) {
-           console.error("Gemini Embedding failed:", await embeddingRes.text());
+           console.error("Gemini Batch Embedding failed:", await embeddingRes.text());
            continue; 
         }
 
         const embeddingData = await embeddingRes.json();
-        const embedding = embeddingData.embedding.values;
-
-        // Save to Supabase pgvector
-        const { error: insertErr } = await supabase.from('legal_knowledge').insert({
+        
+        // Prepare bulk insert to Supabase
+        const insertData = embeddingData.embeddings.map((emb: any, idx: number) => ({
           lex_uz_id: lexId,
           title: title,
-          content_chunk: chunk,
+          content_chunk: batchChunks[idx],
           category: "General",
-          embedding: embedding,
-        });
+          embedding: emb.values,
+        }));
 
-        if (!insertErr) inserted++;
+        // Save to Supabase pgvector in bulk
+        const { error: insertErr } = await supabase.from('legal_knowledge').insert(insertData);
+
+        if (!insertErr) {
+          inserted += batchChunks.length;
+        } else {
+          console.error("Supabase Bulk Insert Error:", insertErr);
+        }
       } catch (embErr) {
-        console.error("Error on chunk:", embErr);
+        console.error("Error on batch:", embErr);
       }
     }
 
