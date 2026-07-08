@@ -38,8 +38,8 @@ export async function POST(req: NextRequest) {
     
     // Naive text extraction (strip HTML tags)
     // In production, we'd use Cheerio to extract just the main content body
-    let rawText = html.replace(/<style[^>]*>.*?<\/style>/gis, '');
-    rawText = rawText.replace(/<script[^>]*>.*?<\/script>/gis, '');
+    let rawText = html.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+    rawText = rawText.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
     rawText = rawText.replace(/<[^>]*>?/gm, ' ');
     rawText = rawText.replace(/\s+/g, ' ').trim();
 
