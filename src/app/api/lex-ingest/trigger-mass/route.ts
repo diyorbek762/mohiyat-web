@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
         url: `${baseUrl}/api/lex-ingest/process-single`,
         body: { lexId: id },
         headers: {
-          "x-internal-secret": process.env.INTERNAL_SECRET || ""
+          "Upstash-Forward-x-internal-secret": process.env.INTERNAL_SECRET || ""
         }
       });
     });
