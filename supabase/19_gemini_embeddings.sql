@@ -2,16 +2,17 @@
 -- MOHIYAT AI — Switch to Gemini Embeddings (768 dimensions) (19)
 -- =============================================================================
 
--- 1. Alter the existing column to support 768 dimensions instead of 1536
+-- 1. Alter the existing column to support 3072 dimensions instead of 1536
 ALTER TABLE public.legal_knowledge 
-  ALTER COLUMN embedding TYPE vector(768);
+  ALTER COLUMN embedding TYPE vector(3072);
 
 -- 2. Drop the old search function
 DROP FUNCTION IF EXISTS match_legal_knowledge(vector(1536), float, int);
+DROP FUNCTION IF EXISTS match_legal_knowledge(vector(768), float, int);
 
--- 3. Recreate the search function with 768 dimensions
+-- 3. Recreate the search function with 3072 dimensions
 CREATE OR REPLACE FUNCTION match_legal_knowledge (
-  query_embedding vector(768),
+  query_embedding vector(3072),
   match_threshold float,
   match_count int
 )

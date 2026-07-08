@@ -58,13 +58,13 @@ export async function POST(req: NextRequest) {
       // Create embedding using Gemini or OpenAI (via OpenRouter if supported, but typically embeddings use standard OpenAI or dedicated embedding models)
       // OpenRouter supports `openai/text-embedding-3-small` or similar, but let's assume we use a standard embedding model
       try {
-        const embeddingRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${process.env.GOOGLE_API_KEY}`, {
+        const embeddingRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:embedContent?key=${process.env.GOOGLE_API_KEY}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            model: "models/text-embedding-004",
+            model: "models/gemini-embedding-2",
             content: { parts: [{ text: chunk }] }
           })
         });
