@@ -58,25 +58,24 @@ export async function POST(req: NextRequest) {
       // Create embedding using Gemini or OpenAI (via OpenRouter if supported, but typically embeddings use standard OpenAI or dedicated embedding models)
       // OpenRouter supports `openai/text-embedding-3-small` or similar, but let's assume we use a standard embedding model
       try {
-        const embeddingRes = await fetch("https://api.openai.com/v1/embeddings", {
+        const embeddingRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${process.env.GOOGLE_API_KEY}`, {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            model: "text-embedding-3-small",
-            input: chunk
+            model: "models/text-embedding-004",
+            content: { parts: [{ text: chunk }] }
           })
         });
 
         if (!embeddingRes.ok) {
-           console.error("Embedding failed:", await embeddingRes.text());
+           console.error("Gemini Embedding failed:", await embeddingRes.text());
            continue; 
         }
 
         const embeddingData = await embeddingRes.json();
-        const embedding = embeddingData.data[0].embedding;
+        const embedding = embeddingData.embedding.values;
 
         // Save to Supabase pgvector
         const { error: insertErr } = await supabase.from('legal_knowledge').insert({
