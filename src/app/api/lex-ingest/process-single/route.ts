@@ -7,7 +7,7 @@ const qstash = new Client({ token: process.env.QSTASH_TOKEN || "" });
 
 export async function POST(req: NextRequest) {
   try {
-    const secret = req.headers.get("x-internal-secret") || req.headers.get("Upstash-Forward-x-internal-secret");
+    const secret = req.headers.get("x-internal-secret");
     if (secret !== (process.env.INTERNAL_SECRET || "")) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
