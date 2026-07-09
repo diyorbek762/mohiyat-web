@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import OpenAI from "openai";
+import { sendTelegramNotification } from "@/lib/telegram";
 
 export const maxDuration = 90;
 
@@ -156,6 +157,23 @@ Kutilayotgan JSON:
     const { error: deductErr } = await serviceSupabase.rpc("deduct_coins_for_user", { p_user_id: initiator_id, p_amount: 10 });
     if (deductErr) {
       console.warn("deduct_coins_for_user RPC not found or failed, coins not deducted", deductErr);
+    }
+
+    // Send instant Telegram notifications
+    await sendTelegramNotification(
+      initiator_id,
+      "Kompromiss tayyor",
+      "AI ikkala tomon talablari asosida adolatli kompromiss hujjatini shakllantirdi.",
+      `/results/${scanSession?.id || room.session_id}`
+    );
+    
+    if (room.guest_user_id) {
+      await sendTelegramNotification(
+        room.guest_user_id,
+        "Kompromiss tayyor",
+        "AI ikkala tomon talablari asosida adolatli kompromiss hujjatini shakllantirdi.",
+        `/negotiate/${room.guest_token}`
+      );
     }
 
     return NextResponse.json({ success: true, balance });

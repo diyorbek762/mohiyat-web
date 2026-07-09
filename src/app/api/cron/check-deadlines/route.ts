@@ -94,6 +94,35 @@ export async function GET(req: NextRequest) {
     if (notificationsToInsert.length > 0) {
       const { error: insertErr } = await supabase.from("app_notifications").insert(notificationsToInsert);
       if (insertErr) throw insertErr;
+
+      // 5. Send Telegram Messages
+      const botToken = process.env.TELEGRAM_BOT_TOKEN;
+      if (botToken) {
+        const userIds = [...new Set(notificationsToInsert.map(n => n.user_id))];
+        const { data: profiles } = await supabase
+          .from("profiles")
+          .select("id, telegram_id")
+          .in("id", userIds)
+          .not("telegram_id", "is", null);
+
+        if (profiles && profiles.length > 0) {
+          const profileMap = new Map(profiles.map(p => [p.id, p.telegram_id]));
+          const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mohiyatai.com";
+          
+          for (const notif of notificationsToInsert) {
+            const chatId = profileMap.get(notif.user_id);
+            if (chatId) {
+              const fullMessage = `🔔 ${notif.title}\n\n${notif.message}\n\nHujjatni ochish: ${appUrl}${notif.link_url}`;
+              
+              await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatId, text: fullMessage })
+              }).catch(e => console.error("Telegram error:", e));
+            }
+          }
+        }
+      }
     }
 
     return NextResponse.json({ success: true, alertsSent: notificationsToInsert.length });

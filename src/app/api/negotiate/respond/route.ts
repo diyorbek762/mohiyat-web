@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
+import { sendTelegramNotification } from "@/lib/telegram";
 
 export const maxDuration = 30;
 
@@ -39,6 +40,18 @@ export async function POST(req: NextRequest) {
     if (error) {
       console.error("submit_guest_response error:", error);
       return NextResponse.json({ error: error.message || "Javob yuborishda xatolik" }, { status: 400 });
+    }
+
+    if (newStatus === "awaiting_confirmation") {
+      const { data: roomData } = await serviceSupabase.from("negotiation_rooms").select("initiator_id, session_id").eq("guest_token", token).single();
+      if (roomData) {
+        await sendTelegramNotification(
+          roomData.initiator_id,
+          "Muzokaraga javob keldi",
+          "Mehmon o'z javob va qarshi takliflarini yubordi. Ko'rib chiqib tasdiqlashingiz kutilmoqda.",
+          `/results/${roomData.session_id}`
+        );
+      }
     }
 
     return NextResponse.json({ success: true, status: newStatus });

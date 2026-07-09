@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { sendTelegramNotification } from "@/lib/telegram";
 
 export async function POST(req: NextRequest) {
   try {
@@ -74,6 +75,12 @@ export async function POST(req: NextRequest) {
             message: "Tashabbuskor sizning qarshi taklifingizga javob qaytardi.",
             link_url: `/negotiate/${room.guest_token}`
         });
+        await sendTelegramNotification(
+            room.guest_user_id,
+            "Yangi taklif keldi",
+            "Tashabbuskor sizning qarshi taklifingizga javob qaytardi.",
+            `/negotiate/${room.guest_token}`
+        );
     }
 
     return NextResponse.json({ success: true });
