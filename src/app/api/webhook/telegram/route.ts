@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
           await sendMessage(chatId, "✅ Hisobingiz muvaffaqiyatli ulandi! Endi qonunchilikdagi o'zgarishlar haqida shu yerda xabardor qilib boraman.");
         } else {
           console.error("Error linking telegram:", error);
-          await sendMessage(chatId, "❌ Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring.");
+          await sendMessage(chatId, `❌ Xatolik yuz berdi: ${error.message || JSON.stringify(error)}`);
         }
       } else {
         await sendMessage(chatId, "❌ Noto'g'ri faollashtirish kodi.");
