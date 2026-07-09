@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
         // Link Telegram ID to Profile
         const { error } = await supabase
           .from('profiles')
-          .update({ telegram_chat_id: chatId })
+          .update({ telegram_id: chatId })
           .eq('id', token);
 
         if (!error) {
