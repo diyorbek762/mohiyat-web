@@ -19,6 +19,8 @@ interface Notification {
 export default function NotificationBell() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [hasTelegram, setHasTelegram] = useState<boolean>(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,6 +29,19 @@ export default function NotificationBell() {
     async function fetchNotifications() {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) return;
+      
+      setUserId(session.user.id);
+
+      // Check if user has telegram connected
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("telegram_id")
+        .eq("id", session.user.id)
+        .single();
+        
+      if (profile && !profile.telegram_id) {
+        setHasTelegram(false);
+      }
 
       const { data } = await supabase
         .from("app_notifications")
@@ -108,6 +123,19 @@ export default function NotificationBell() {
                 </span>
               )}
             </div>
+            
+            {/* Telegram Deep Link Banner */}
+            {!hasTelegram && userId && (
+              <a 
+                href={`https://t.me/mohiyat_ai_bot?start=${userId}`}
+                target="_blank"
+                rel="noreferrer"
+                className="block w-full bg-gradient-to-r from-blue-500 to-indigo-600 p-3 text-white text-sm font-medium hover:opacity-90 transition-opacity flex items-center justify-between"
+              >
+                <span>Telegram botimizga ulaning 🚀</span>
+                <span className="bg-white/20 px-2 py-1 rounded text-xs font-bold">Ulash</span>
+              </a>
+            )}
             
             <div className="max-h-96 overflow-y-auto">
               {notifications.length === 0 ? (
