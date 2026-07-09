@@ -41,6 +41,12 @@ export async function POST(req: NextRequest) {
       const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
       
       if (uuidRegex.test(token)) {
+        // First, remove this telegram ID from any other profile to avoid UNIQUE constraint violation
+        await supabase
+          .from('profiles')
+          .update({ telegram_id: null })
+          .eq('telegram_id', chatId);
+
         // Link Telegram ID to Profile
         const { error } = await supabase
           .from('profiles')
