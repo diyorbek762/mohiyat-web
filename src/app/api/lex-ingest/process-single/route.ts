@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     // Distribute via QStash in batches
     const BATCH_SIZE = 50; 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mohiyatai.com";
+    const baseUrl = new URL(req.url).origin;
     
     const publishPromises = [];
     let delaySeconds = 0;

@@ -23,8 +23,8 @@ export async function POST(req: NextRequest) {
     
     // In a real scenario for daily cron, we would fetch RSS feed and get new IDs.
     
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mohiyatai.com"; // Adjust accordingly
-
+    const baseUrl = new URL(req.url).origin;
+    
     // Queue tasks in Upstash QStash
     const publishPromises = coreLexIds.map(id => {
       return qstash.publishJSON({
