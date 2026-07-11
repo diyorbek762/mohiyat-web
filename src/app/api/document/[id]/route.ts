@@ -73,7 +73,7 @@ export async function GET(
     else if (ext === 'docx') contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 
     // Return the decrypted file
-    return new NextResponse(decryptedBuffer, {
+    return new NextResponse(decryptedBuffer as unknown as BodyInit, {
       headers: {
         'Content-Type': contentType,
         'Content-Disposition': `inline; filename="${sessionData.file_name}"`,
