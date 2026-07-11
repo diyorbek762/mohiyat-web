@@ -2,13 +2,24 @@
 
 import React, { useState, useRef } from 'react';
 import { FileText, Plus, X, ArrowRight, Loader2, AlertTriangle, Sparkles } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { scanDocument } from "@/lib/api";
 import { supabase } from "@/lib/supabase";
 import { validateFile, formatFileSize, ALLOWED_EXTENSIONS } from "@/lib/utils";
 
-export default function UploadPage() {
+export default function UploadPageWrapper() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-white">Yuklanmoqda...</div>}>
+      <UploadPage />
+    </Suspense>
+  );
+}
+
+function UploadPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isCrm = searchParams?.get('crm') === 'true';
   const inputRef = useRef<HTMLInputElement>(null);
   
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -108,7 +119,7 @@ export default function UploadPage() {
 
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      const result = await scanDocument(selectedFile!, 'rag_auto', session?.user?.id, contextAnswers);
+      const result = await scanDocument(selectedFile!, 'rag_auto', session?.user?.id, contextAnswers, isCrm);
       
       setProgress(100);
       clearInterval(progressInterval);
@@ -141,13 +152,17 @@ export default function UploadPage() {
               <Sparkles className="w-4 h-4 text-yellow-300" />
             </div>
             <div className="flex items-center gap-3">
-              <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">Mohiyat AI</h1>
+              <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
+                {isCrm ? "Mohiyat AI - CRM" : "Mohiyat AI"}
+              </h1>
               <span className="bg-white/20 backdrop-blur-md text-white text-[10px] md:text-xs font-bold px-2.5 py-1 rounded-lg border border-white/30">
                 V2
               </span>
             </div>
             <p className="hidden md:block text-blue-100/80 mt-3 max-w-md">
-              Shartnomalaringizni sun'iy intellekt orqali O'zbekiston qonunchiligiga asosan xavfsiz tahlil qiling.
+              {isCrm 
+                ? "B2B shartnomalaringizni CRM arxiviga qo'shish uchun shu yerga yuklang." 
+                : "Shartnomalaringizni sun'iy intellekt orqali O'zbekiston qonunchiligiga asosan xavfsiz tahlil qiling."}
             </p>
           </div>
         </div>

@@ -101,7 +101,7 @@ export function FileUploadDropzone({ onFileAccepted, isProcessing, processingPro
               <p className="text-sm text-[var(--foreground-muted)] mt-1">PDF, DOCX yoki rasm formatida · max 10MB</p>
             </div>
             <div className="flex items-center gap-3 text-xs text-[var(--foreground-muted)]">
-              {["PDF", "DOCX", "JPG", "PNG"].map((fmt) => (
+              {["PDF", "DOCX", "JPG", "PNG", "TXT"].map((fmt) => (
                 <span key={fmt} className="px-2.5 py-1 rounded-md font-mono font-medium" style={{ background: "rgba(37,99,235,0.04)", border: "1px solid rgba(37,99,235,0.08)" }}>
                   .{fmt.toLowerCase()}
                 </span>
@@ -123,7 +123,7 @@ export function FileUploadDropzone({ onFileAccepted, isProcessing, processingPro
         <div className="w-5 h-5 rounded-md flex items-center justify-center" style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.15)" }}>
           <svg className="w-3 h-3 text-[var(--success)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
         </div>
-        <span className="text-xs text-[var(--foreground-muted)] font-medium">Faylingiz tahlildan so&apos;ng darhol va abadiy o&apos;chiriladi</span>
+        <span className="text-xs text-[var(--foreground-muted)] font-medium">Faylingiz AES-256 bilan shifrlanib, xavfsiz saqlanadi</span>
       </div>
     </div>
   );

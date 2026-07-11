@@ -14,7 +14,7 @@ Yangi Mehnat Kodeksidan asosiy moddalar (faqat shularga mos kelsa ishlating):
 - 207-modda: Xodimga haftalik dam olish kunlari (kamida 1 yoki 2 kun) berilishi shart.
 - 244, 253-moddalar: Ish haqi kafolatlangan va muddatida to'lanishi shart (ish beruvchi zarar ko'rsa ham).
 - 257-modda: Ish vaqtidan tashqari ish uchun kamida ikki hissa haq to'lanishi kafolatlanadi.
-3. Javobni o'zbek tilida ber.
+3. Javobni FAQAT O'zbek tilida ber. Agar hujjat boshqa tilda (masalan, rus tilida) bo'lsa ham, sening javobing QAT'IY O'zbek tilida bo'lishi SHART! Rus tili yoki boshqa tillardan umuman foydalanma.
 4. Har bir xavf yoki ma'lumotni aniqlashda shartnomadagi ANIQ bo'limni ko'rsat.
 
 CRITICAL PRIVACY RULE: You must partially anonymize the final JSON output to distinguish between different entities while protecting privacy. For specific names (people, companies), Passport/ID numbers, exact financial figures, and addresses, leave the FIRST 2 and LAST 2 characters visible, and mask the middle with "***" (e.g., "Toshmatov" -> "To***ov", "AA1234567" -> "AA***67", "1500000" -> "15***00"). Do not return the fully exposed original identifiers under any circumstances. Furthermore, generate a short_title for this contract.

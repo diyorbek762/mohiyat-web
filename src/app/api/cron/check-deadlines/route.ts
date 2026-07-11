@@ -24,6 +24,7 @@ export async function GET(req: NextRequest) {
     const { data: sessions, error: sessionErr } = await supabase
       .from("scan_sessions")
       .select("id, short_title, crm_deadline, crm_amount, crm_currency, crm_counterparty, org_id, user_id")
+      .eq("in_crm", true)
       .not("crm_deadline", "is", null);
 
     if (sessionErr) throw sessionErr;
@@ -51,7 +52,7 @@ export async function GET(req: NextRequest) {
 
       // Alert conditions: exactly 3 days or exactly 1 day remaining
       if (diffDays === 3 || diffDays === 1) {
-        const linkUrl = `/results/${session.id}`;
+        const linkUrl = `/results/${session.id}?highlight=muddat`;
         
         // Prevent duplicate alerts for the same session today
         if (recentNotifLinks.includes(linkUrl)) continue;

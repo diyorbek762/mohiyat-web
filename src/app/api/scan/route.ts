@@ -51,6 +51,7 @@ export async function POST(req: NextRequest) {
     const documentType = formData.get("document_type") as string || "other";
     const userId = formData.get("user_id") as string | null;
     const orgId = formData.get("org_id") as string | null;
+    const inCrm = formData.get("in_crm") === "true";
 
     const authHeader = req.headers.get("Authorization");
     const token = authHeader?.replace("Bearer ", "");
@@ -120,16 +121,24 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
+    // Normalize file type based on extension just in case it's application/octet-stream
+    const ext = file.name.split('.').pop()?.toLowerCase();
+    let normalizedType = file.type;
+    if (ext === 'txt') normalizedType = 'text/plain';
+    if (ext === 'pdf') normalizedType = 'application/pdf';
+    if (ext === 'jpg' || ext === 'jpeg') normalizedType = 'image/jpeg';
+    if (ext === 'png') normalizedType = 'image/png';
+
     // 1. Matnni oldindan ajratib olish (RAG va OpenRouter uchun)
     let documentText = "";
-    if (file.type === "application/pdf") {
+    if (normalizedType === "application/pdf") {
       try {
         const pdfData = await pdfParse(buffer);
         documentText = pdfData.text;
       } catch (e) {
         console.warn("PDF parse failed during RAG:", e);
       }
-    } else if (file.type.startsWith("text/")) {
+    } else if (normalizedType.startsWith("text/")) {
       documentText = buffer.toString("utf8");
     }
 
@@ -214,7 +223,7 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
     const filePart = {
       inlineData: {
         data: buffer.toString("base64"),
-        mimeType: file.type,
+        mimeType: normalizedType,
       },
     };
 
@@ -225,7 +234,7 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
     try {
       // TIER 1: Gemini 2.0 Flash Natively
       const result = await model.generateContent([
-        "Ushbu hujjatni tahlil qiling va xavflarni aniqlang.",
+        "Ushbu hujjatni tahlil qiling va xavflarni aniqlang. BARCHA JAVOBLAR FAQAT O'ZBEK TILIDA BO'LISHI QAT'IY SHART!",
         filePart
       ]);
       responseText = result.response.text();
@@ -238,22 +247,22 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
         const truncatedText = documentText.substring(0, 100000);
         openRouterMessages = [
           { role: "system", content: dynamicInstruction },
-          { role: "user", content: `Ushbu hujjatni tahlil qiling va xavflarni aniqlang:\n\n${truncatedText}${documentText.length > 100000 ? '\n\n[DIQQAT: Hujjat juda uzun bo\'lgani uchun faqat boshlang\'ich qismi tahlil qilindi]' : ''}` }
+          { role: "user", content: `Ushbu hujjatni tahlil qiling va xavflarni aniqlang. JAVOBLAR FAQAT O'ZBEK TILIDA BO'LISHI SHART:\n\n${truncatedText}${documentText.length > 100000 ? '\n\n[DIQQAT: Hujjat juda uzun bo\'lgani uchun faqat boshlang\'ich qismi tahlil qilindi]' : ''}` }
         ];
-      } else if (file.type.startsWith("image/")) {
+      } else if (normalizedType.startsWith("image/")) {
         openRouterMessages = [
           { role: "system", content: dynamicInstruction },
           { role: "user", content: [
-            { type: "text", text: "Ushbu hujjatni tahlil qiling va xavflarni aniqlang:" },
-            { type: "image_url", image_url: { url: `data:${file.type};base64,${buffer.toString("base64")}` } }
+            { type: "text", text: "Ushbu hujjatni tahlil qiling va xavflarni aniqlang. JAVOBLAR FAQAT O'ZBEK TILIDA BO'LISHI SHART:" },
+            { type: "image_url", image_url: { url: `data:${normalizedType};base64,${buffer.toString("base64")}` } }
           ]}
         ];
       } else {
-        throw new Error("Kechirasiz, ushbu fayl formati qo'llab-quvvatlanmaydi.");
+        throw new Error(`Kechirasiz, ushbu fayl formati qo'llab-quvvatlanmaydi. Tizim hujjatni o'qiy olmadi (Turi: ${normalizedType})`);
       }
 
       try {
-        const isImage = file.type.startsWith("image/");
+        const isImage = normalizedType.startsWith("image/");
         
         // Vision models for images, or all models for text/PDF
         const orModels = isImage ? [
@@ -325,6 +334,36 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
       };
     }
 
+    // Upload the encrypted file using Admin (Service Role) client to bypass RLS policies
+    let documentPath = null;
+    try {
+      const { encryptBuffer } = await import("@/lib/encryption");
+      const encryptedBuffer = encryptBuffer(buffer);
+      
+      const filePath = `${userId || 'guest'}/${Date.now()}_${file.name}`;
+      
+      const adminSupabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+      );
+      
+      const { data: uploadData, error: uploadError } = await adminSupabase
+        .storage
+        .from('documents')
+        .upload(filePath, encryptedBuffer, {
+          contentType: 'application/octet-stream',
+          upsert: false
+        });
+        
+      if (uploadError) {
+        console.error("Storage upload error:", uploadError);
+      } else {
+        documentPath = uploadData?.path || filePath;
+      }
+    } catch (encError) {
+      console.error("Encryption/Upload failed:", encError);
+    }
+
     // Since we paused payment, we save the full_report directly and unlock it
     const sessionData = {
       user_id: userId,
@@ -336,7 +375,7 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
       short_title: analysis.short_title || "Shartnoma",
       blind_spots: analysis.blind_spots || [],
       risk_score: analysis.risk_score || 50,
-      full_report: analysis, // <--- FULL REPORT UNLOCKED FOR FREE
+      full_report: { ...analysis, document_path: documentPath, document_text: documentText }, // <--- SAVING ENCRYPTED FILE PATH AND EXTRACTED TEXT
       crm_counterparty: analysis.crm_counterparty || null,
       crm_amount: typeof analysis.crm_amount === 'number' ? analysis.crm_amount : null,
       crm_currency: analysis.crm_currency || null,
@@ -344,6 +383,7 @@ ${contextAnswers ? contextAnswers : "Kontekst berilmagan."}`;
       llm_model_used: finalModelUsed,
       processing_ms: processingMs,
       status: "unlocked", // <--- MARKED AS UNLOCKED
+      in_crm: inCrm,
     };
 
     const { data: insertedSession, error: insertError } = await authSupabase

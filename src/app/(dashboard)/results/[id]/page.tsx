@@ -10,11 +10,17 @@ import { CertificateModal } from '@/components/results/CertificateModal';
 import { ChatModal } from '@/components/results/ChatModal';
 import { CounterOfferModal } from '@/components/results/CounterOfferModal';
 import { NegotiateModal } from '@/components/results/NegotiateModal';
+import { DocumentViewerModal } from '@/components/results/DocumentViewerModal';
 import { ActiveNegotiation } from '@/components/results/ActiveNegotiation';
 
 export default function ResultsPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
   const router = useRouter();
+  // Using generic window.location or next/navigation for search params doesn't work directly inside use() in next 15 if it's dynamic, 
+  // but this is a client component, we can use useSearchParams. Wait, useSearchParams must be used inside a Suspense boundary in some cases.
+  // Actually, we can just use window.location.search on mount if we want to avoid Suspense issues, or useSearchParams.
+  // Let's stick to the simplest approach to get query params in a client component.
+  const [highlightQuery, setHighlightQuery] = useState<string | null>(null);
   const [scanResult, setScanResult] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [feedbackGiven, setFeedbackGiven] = useState(false);
@@ -40,6 +46,10 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
 
   // Negotiate Modal State
   const [negotiateModalOpen, setNegotiateModalOpen] = useState(false);
+
+  // Document Viewer State
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [documentText, setDocumentText] = useState<string | undefined>(undefined);
 
   // Negotiation room state
   const [negotiationRoom, setNegotiationRoom] = useState<any>(null);
@@ -75,6 +85,26 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
               is_scam: data.full_report?.is_scam || false,
               scam_details: data.full_report?.scam_details || "",
             });
+            if (data.full_report?.document_text) {
+              setDocumentText(data.full_report.document_text);
+            } else {
+              fetch(`/api/document/${resolvedParams.id}/text`)
+                .then(res => res.json())
+                .then(json => {
+                  if (json.text) setDocumentText(json.text);
+                })
+                .catch(err => console.error("Error fetching text:", err));
+            }
+            
+            // Check for highlight in URL
+            if (typeof window !== 'undefined') {
+              const urlParams = new URLSearchParams(window.location.search);
+              const highlight = urlParams.get('highlight');
+              if (highlight) {
+                setHighlightQuery(highlight);
+                setViewerOpen(true);
+              }
+            }
             // Look for existing draft
             if (data.counter_offer_draft && data.counter_offer_draft.length > 0) {
                setCoDraft(data.counter_offer_draft[data.counter_offer_draft.length - 1].draft);
@@ -358,34 +388,34 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
           </div>
 
           {/* Unified Actions Toolbar: Counter-Offer, Chat & QR Certificate */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-2">
+          <div className="grid grid-cols-2 sm:flex sm:flex-row gap-3 md:gap-4 mb-4">
+            <button 
+              onClick={() => setViewerOpen(true)}
+              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white p-3 md:p-4 rounded-xl md:rounded-2xl font-bold flex items-center justify-center gap-2 transition-colors shadow-md group"
+            >
+              <FileText className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
+              <span className="text-sm md:text-base">Asl Hujjat</span>
+            </button>
             <button 
               onClick={() => setNegotiateModalOpen(true)}
-              className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-colors shadow-md group"
+              className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white p-3 md:p-4 rounded-xl md:rounded-2xl font-bold flex items-center justify-center gap-2 transition-colors shadow-md group"
             >
-              <Users className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span>Muzokara Boshlash</span>
+              <Users className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
+              <span className="text-sm md:text-base">Muzokara</span>
             </button>
             <button 
               onClick={() => coDraft ? window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }) : setCoModalOpen(true)}
-              className="flex-1 bg-slate-900 hover:bg-slate-800 text-white p-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-colors shadow-md group"
+              className="flex-1 bg-slate-900 hover:bg-slate-800 text-white p-3 md:p-4 rounded-xl md:rounded-2xl font-bold flex items-center justify-center gap-2 transition-colors shadow-md group"
             >
-              <PenTool className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span>{coDraft ? "Tayyor xatni ko'rish" : "Qarshi Taklif (3 Coin)"}</span>
+              <PenTool className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
+              <span className="text-sm md:text-base">Qarshi Taklif</span>
             </button>
             <button 
               onClick={() => setChatModalOpen(true)}
-              className="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 p-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-colors shadow-sm group"
+              className="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 p-3 md:p-4 rounded-xl md:rounded-2xl font-bold flex items-center justify-center gap-2 transition-colors shadow-sm group"
             >
-              <MessageSquare className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span>Hujjat bilan Chat</span>
-            </button>
-            <button 
-              onClick={() => setQrModalOpen(true)}
-              className="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 p-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-colors shadow-sm"
-            >
-              <QrCode className="w-5 h-5 text-slate-600" />
-              <span>Sertifikat</span>
+              <MessageSquare className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
+              <span className="text-sm md:text-base">AI Chat</span>
             </button>
           </div>
 
@@ -544,6 +574,15 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
         setIsOpen={setQrModalOpen}
         sessionId={resolvedParams.id}
         sessionData={sessionData}
+      />
+
+      {/* Document Viewer Modal */}
+      <DocumentViewerModal
+        isOpen={viewerOpen}
+        setIsOpen={setViewerOpen}
+        documentText={documentText}
+        highlightQuery={highlightQuery}
+        sessionId={resolvedParams.id}
       />
 
       {/* Floating Toast Notification */}

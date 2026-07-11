@@ -20,15 +20,22 @@ export async function sendTelegramNotification(userId: string, title: string, me
       const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mohiyatai.com";
       const fullMessage = `🔔 *${title}*\n\n${message}\n\nHujjatni ochish: ${appUrl}${linkUrl}`;
       
-      await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           chat_id: profile.telegram_id, 
-          text: fullMessage,
-          parse_mode: 'Markdown'
+          text: fullMessage
         })
       });
+      const data = await response.json();
+      if (!response.ok) {
+        console.error("Telegram API Error:", data);
+      } else {
+        console.log("Telegram notification sent successfully to", profile.telegram_id);
+      }
+    } else {
+      console.log("User", userId, "does not have a telegram_id linked.");
     }
   } catch (error) {
     console.error("Failed to send telegram notification:", error);

@@ -7,7 +7,7 @@ const API_BASE_URL = "/api";
  * Upload a document file to the FastAPI backend for freemium analysis.
  * Returns the scan result with blind spots (hook) — no full report.
  */
-export async function scanDocument(file: File, documentType: string, userId?: string, contextAnswers?: Record<number, string>): Promise<ScanResult> {
+export async function scanDocument(file: File, documentType: string, userId?: string, contextAnswers?: Record<number, string>, inCrm?: boolean): Promise<ScanResult> {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("document_type", documentType);
@@ -18,6 +18,9 @@ export async function scanDocument(file: File, documentType: string, userId?: st
     // Format answers nicely
     const answersText = Object.entries(contextAnswers).map(([idx, ans]) => `Q${Number(idx)+1}: ${ans}`).join("\n");
     formData.append("context_answers", answersText);
+  }
+  if (inCrm) {
+    formData.append("in_crm", "true");
   }
 
   // Get current session token for authenticated request
